@@ -5450,9 +5450,9 @@ LOj5E6Fjh8PhcDgcDofD4XA4HA6Hw+FwOBwOh8PhcDgcDofD4XA4HA6Hw+Fw
 OBwOh8PhcDgcDofD4XA4HA6Hw+FwOBwOh8PhcDgcDofD4XA4HA6Hw+FwOBwO
 h8PhcDgcDofD4XA4HA6Hw+FwOBwOh8PhcDgcDofD4XA4HA6Hw+FwOBwOh8Ph
 cDgOjf8DWmt/Bw==
-"], "Byte", ColorSpace -> "RGB", Interleaving -> True, MetaInformation -> <|"Exif" -> <|"Orientation" -> <|"CameraTopOrientation" -> Top, "Mirrored" -> False|>, "XResolution" -> 72, "YResolution" -> 72, "ResolutionUnit" -> "Inch", "Software" -> "Adobe Photoshop 22.4 (Macintosh)", "DateTime" -> DateObject[{2023, 4, 1, 11, 29, 0.}, "Instant", "Gregorian", 2.], "ExifTag" -> 168, "DateTimeDigitized" -> DateObject[{2023, 3, 31, 20, 12, 11.}, "Instant", "Gregorian", 2.], "ColorSpace" -> "RGBColor", "PixelXDimension" -> 996, "PixelYDimension" -> 797|>, "IPTC" -> <|"Application2" -> <|"RecordVersion" -> 2, "DigitizationDate" -> DateObject[{2023, 3, 31}, "Day"], "DigitizationTime" -> DateObject[{2011, 12, 20}, "Day", "Gregorian", 2.]|>, "Envelope" -> <|"CharacterSet" -> "UTF8"|>|>, "XMP" -> <|"DublinCoreSchema" -> <|"Format" -> "image/jpeg"|>, "XMPMediaManagementSchema" -> <|"OriginalDocumentID" -> "xmp.did:3257a60d-cb19-4aa8-83ac-2e1cbe831c18", "DocumentID" -> "adobe:docid:photoshop:7de0d1ea-8273-ae4a-8b9b-edc5361a3bd4", "InstanceID" -> "xmp.iid:c6f3b803-053c-4e31-a380-e8d08e53e631", "History[1]" -> <|"Event" -> <|"SoftwareAgent" -> "Adobe Photoshop 22.4 (Macintosh)", "When" -> "2023-03-31T20:12:11+02:00", "InstanceID" -> "xmp.iid:3257a60d-cb19-4aa8-83ac-2e1cbe831c18", "Action" -> "created"|>|>, "History[2]" -> <|"Event" -> <|"Action" -> "converted", "Parameters" -> "from image/png to application/vnd.adobe.photoshop"|>|>, "History[3]" -> <|"Event" -> <|"SoftwareAgent" -> "Adobe Photoshop 22.4 (Macintosh)", "Changed" -> "/", "When" -> "2023-03-31T22:41:42+02:00", "InstanceID" -> "xmp.iid:881f2651-6cf8-4fb6-a3c1-bb8dfca7134d", "Action" -> "saved"|>|>, "History[4]" -> <|"Event" -> <|"SoftwareAgent" -> "Adobe Photoshop 22.4 (Macintosh)", "Changed" -> "/", "When" -> "2023-04-01T11:29+02:00", "InstanceID" -> "xmp.iid:f99f826e-88f9-49f0-9edb-233a7bef1cda", "Action" -> "saved"|>|>, "History[5]" -> <|"Event" -> <|"Action" -> "converted", "Parameters" -> "from application/vnd.adobe.photoshop to image/jpeg"|>|>, "History[6]" -> <|"Event" -> <|"Action" -> "derived", "Parameters" -> "converted from application/vnd.adobe.photoshop to image/jpeg"|>|>, "History[7]" -> <|"Event" -> <|"SoftwareAgent" -> "Adobe Photoshop 22.4 (Macintosh)", "Changed" -> "/", "When" -> "2023-04-01T11:29+02:00", "InstanceID" -> "xmp.iid:c6f3b803-053c-4e31-a380-e8d08e53e631", "Action" -> "saved"|>|>, "DerivedFrom" -> <|"Reference" -> <|"OriginalDocumentID" -> "xmp.did:3257a60d-cb19-4aa8-83ac-2e1cbe831c18", "InstanceID" -> "xmp.iid:f99f826e-88f9-49f0-9edb-233a7bef1cda", "DocumentID" -> "xmp.did:3257a60d-cb19-4aa8-83ac-2e1cbe831c18"|>|>|>, "XMPBasicSchema" -> <|"CreatorTool" -> "Adobe Photoshop 22.4 (Macintosh)", "ModifyDate" -> "2023-04-01T11:29+02:00", "CreateDate" -> "2023-03-31T20:12:11+02:00", "MetadataDate" -> "2023-04-01T11:29+02:00"|>, "PhotoshopSchema" -> <|"ICCProfile" -> "sRGB IEC61966-2.1", "ColorMode" -> 3|>|>|>],Magnification-> 0.3]}],CellMargins->{{70,5},{5,5}}];
+"], "Byte", ColorSpace -> "RGB", Interleaving -> True, MetaInformation -> <|"Exif" -> <|"Orientation" -> <|"CameraTopOrientation" -> Top, "Mirrored" -> False|>, "XResolution" -> 72, "YResolution" -> 72, "ResolutionUnit" -> "Inch", "Software" -> "Adobe Photoshop 22.4 (Macintosh)", "DateTime" -> DateObject[{2023, 4, 1, 11, 29, 0.}, "Instant", "Gregorian", 1.], "ExifTag" -> 168, "DateTimeDigitized" -> DateObject[{2023, 3, 31, 20, 12, 11.}, "Instant", "Gregorian", 1.], "ColorSpace" -> "RGBColor", "PixelXDimension" -> 996, "PixelYDimension" -> 797|>, "IPTC" -> <|"Application2" -> <|"RecordVersion" -> 2, "DigitizationDate" -> DateObject[{2023, 3, 31}, "Day"], "DigitizationTime" -> DateObject[{2011, 12, 20}, "Day", "Gregorian", 2.]|>, "Envelope" -> <|"CharacterSet" -> "UTF8"|>|>, "XMP" -> <|"DublinCoreSchema" -> <|"Format" -> "image/jpeg"|>, "XMPMediaManagementSchema" -> <|"OriginalDocumentID" -> "xmp.did:3257a60d-cb19-4aa8-83ac-2e1cbe831c18", "DocumentID" -> "adobe:docid:photoshop:7de0d1ea-8273-ae4a-8b9b-edc5361a3bd4", "InstanceID" -> "xmp.iid:c6f3b803-053c-4e31-a380-e8d08e53e631", "History[1]" -> <|"Event" -> <|"SoftwareAgent" -> "Adobe Photoshop 22.4 (Macintosh)", "When" -> "2023-03-31T20:12:11+02:00", "InstanceID" -> "xmp.iid:3257a60d-cb19-4aa8-83ac-2e1cbe831c18", "Action" -> "created"|>|>, "History[2]" -> <|"Event" -> <|"Action" -> "converted", "Parameters" -> "from image/png to application/vnd.adobe.photoshop"|>|>, "History[3]" -> <|"Event" -> <|"SoftwareAgent" -> "Adobe Photoshop 22.4 (Macintosh)", "Changed" -> "/", "When" -> "2023-03-31T22:41:42+02:00", "InstanceID" -> "xmp.iid:881f2651-6cf8-4fb6-a3c1-bb8dfca7134d", "Action" -> "saved"|>|>, "History[4]" -> <|"Event" -> <|"SoftwareAgent" -> "Adobe Photoshop 22.4 (Macintosh)", "Changed" -> "/", "When" -> "2023-04-01T11:29+02:00", "InstanceID" -> "xmp.iid:f99f826e-88f9-49f0-9edb-233a7bef1cda", "Action" -> "saved"|>|>, "History[5]" -> <|"Event" -> <|"Action" -> "converted", "Parameters" -> "from application/vnd.adobe.photoshop to image/jpeg"|>|>, "History[6]" -> <|"Event" -> <|"Action" -> "derived", "Parameters" -> "converted from application/vnd.adobe.photoshop to image/jpeg"|>|>, "History[7]" -> <|"Event" -> <|"SoftwareAgent" -> "Adobe Photoshop 22.4 (Macintosh)", "Changed" -> "/", "When" -> "2023-04-01T11:29+02:00", "InstanceID" -> "xmp.iid:c6f3b803-053c-4e31-a380-e8d08e53e631", "Action" -> "saved"|>|>, "DerivedFrom" -> <|"Reference" -> <|"OriginalDocumentID" -> "xmp.did:3257a60d-cb19-4aa8-83ac-2e1cbe831c18", "InstanceID" -> "xmp.iid:f99f826e-88f9-49f0-9edb-233a7bef1cda", "DocumentID" -> "xmp.did:3257a60d-cb19-4aa8-83ac-2e1cbe831c18"|>|>|>, "XMPBasicSchema" -> <|"CreatorTool" -> "Adobe Photoshop 22.4 (Macintosh)", "ModifyDate" -> "2023-04-01T11:29+02:00", "CreateDate" -> "2023-03-31T20:12:11+02:00", "MetadataDate" -> "2023-04-01T11:29+02:00"|>, "PhotoshopSchema" -> <|"ICCProfile" -> "sRGB IEC61966-2.1", "ColorMode" -> 3|>|>|>],Magnification-> 0.3]}],CellMargins->{{70,5},{5,5}}];
 Print[TextCell["  SDB, JMR, MR.
-  arXiv:2103.x 
+  arXiv:2105.xxxxx 
 
   Type rg$variable_name to print the RGEs.",FontSize->18]]
 
@@ -5488,6 +5488,9 @@ CouplingMatrixD::usage="Rotate to mass basis"
 CouplingMatrixL::usage="Rotate to mass basis"
 rgePSEFTparam::usage="Parametric RGE Solve"
 rgePSEFTparamreset::usage="Parametric RGE Solve reset"
+changeBasis::usage="WCs basis change from derivative basis to singlet basis."
+derivativebasisinput::usage="WCs for changeBasis input"
+dbinputtemplate::usage="WCs for changeBasis input"
 
 
 (* ::Input::Initialization:: *)
@@ -5781,7 +5784,7 @@ y4allsum::usage="Internal function"
 asf\[Phi]ysum::usage="Internal function"
 yallsumswap::usage="Internal function"
 asf\[Phi]yyyrename::usage="Internal function"
-
+chop::usage="Internal function"
 
 
 L$gem::usage="Function for internal usage"
@@ -11516,7 +11519,7 @@ rg$\[Kappa]s=if$unicornindexless[\[Kappa]s];
 rg$asBt =Expand[ RGE[asBt]/.Expand[alpsmeftrges]  /.iv$couplinglistmu ];
 rg$asB =Expand[ RGE[asB]/.Expand[alpsmeftrges]   /.iv$couplinglistmu ];
 rg$asWt =Expand[ RGE[asWt]/.Expand[alpsmeftrges]   /.iv$couplinglistmu ];
-rg$asW =Expand[ RGE[asWt]/.Expand[alpsmeftrges]   /.iv$couplinglistmu ];
+rg$asW =Expand[ RGE[asW]/.Expand[alpsmeftrges]   /.iv$couplinglistmu ];
 rg$asGt =Expand[ RGE[asGt]/.Expand[alpsmeftrges]  /.iv$couplinglistmu ];
 rg$asG =Expand[ RGE[asG]/.Expand[alpsmeftrges]  /.iv$couplinglistmu ];
 
@@ -11545,6 +11548,10 @@ rg$asd\[Phi]31=if$unicorn[asd\[Phi],3,1];rg$asd\[Phi]32=if$unicorn[asd\[Phi],3,2
 rg$asd\[Phi]bar11=if$unicorn[asd\[Phi]bar,1,1];rg$asd\[Phi]bar12=if$unicorn[asd\[Phi]bar,1,2];rg$asd\[Phi]bar13=if$unicorn[asd\[Phi]bar,1,3];
 rg$asd\[Phi]bar21=if$unicorn[asd\[Phi]bar,2,1];rg$asd\[Phi]bar22=if$unicorn[asd\[Phi]bar,2,2];rg$asd\[Phi]bar23=if$unicorn[asd\[Phi]bar,2,3];
 rg$asd\[Phi]bar31=if$unicorn[asd\[Phi]bar,3,1];rg$asd\[Phi]bar32=if$unicorn[asd\[Phi]bar,3,2];rg$asd\[Phi]bar33=if$unicorn[asd\[Phi]bar,3,3];
+
+
+(* ::Input::Initialization:: *)
+chop[a_]:=Chop[a,10^-($MachinePrecision)]
 
 
 (* ::Input::Initialization:: *)
@@ -27102,14 +27109,22 @@ mu * Yu33'[mu]==rg$Yu33,mu * Yubar33'[mu]==rg$Yubar33}/.iv$zerolistSM;
 
 rgeSMto\[CapitalLambda]reset[BC_,Hscale_,vevscale_]:=Monitor[PrintTemporary["Running the SM paramaters to "<>ToString[Sort[{Hscale,vevscale}][[2]]]<>" GeV"];
 EchoTiming[
-rgeSMto\[CapitalLambda]=Chop[NDSolve[Join[toSolvingSMRGEs,
+rgeSMto\[CapitalLambda]=chop[NDSolve[Join[toSolvingSMRGEs,
 Flatten@Join[BC,
 (DeleteCases[Thread[Keys[#]->(Conjugate[Values[#]])]&/@(BC/.Equal->Rule),
 Alternatives@@{g1[_]->_,g2[_]->_,g3[_]->_,\[Mu]H2[_]->_,\[Lambda]\[Phi][_]->_}]/.{Ye11->Yebar11,Ye12->Yebar12,Ye13->Yebar13,Ye21->Yebar21,Ye22->Yebar22,Ye23->Yebar23,Ye31->Yebar31,Ye32->Yebar32,Ye33->Yebar33,Yd11->Ydbar11,Yd12->Ydbar12,Yd13->Ydbar13,Yd21->Ydbar21,Yd22->Ydbar22,Yd23->Ydbar23,Yd31->Ydbar31,Yd32->Ydbar32,Yd33->Ydbar33,Yu11->Yubar11,Yu12->Yubar12,Yu13->Yubar13,Yu21->Yubar21,Yu22->Yubar22,Yu23->Yubar23,Yu31->Yubar31,Yu32->Yubar32,Yu33->Yubar33})/.Rule->Equal]],
-couplinglistSM,{mu,vevscale,Hscale},Method->{"EquationSimplification"->"Solve"}],10^-($MachinePrecision)][[1]]
+couplinglistSM,{mu,vevscale,Hscale},Method->{"EquationSimplification"->"Solve"}]][[1]]
 ];
 Print["Output saved in 'rgeSMto\[CapitalLambda]'"];
 ,ListAnimate[iv$run,AnimationRate->28,ImageSize->Small,Paneled->False]/.HoldPattern[AppearanceElements->_]->(AppearanceElements->None)]
+
+
+(* ::Input::Initialization:: *)
+dbinputtemplate=Module[{pick0},(Thread[{"CQ","CU","CD","CL","CE","YU","YD","YE"}->pick0]/.pick0->Array[RandomReal[]&,{3,3}])~Join~(Thread[{"CG","CW","CB","g1","g2","g3"}->1])]
+
+
+changeBasis[derivativebasisinput_]:={"asu\[Phi]"-> I (Association[derivativebasisinput]["YU"] . Association[derivativebasisinput]["CU"]- Association[derivativebasisinput]["CQ"] . Association[derivativebasisinput]["YU"]),"asd\[Phi]"-> I (Association[derivativebasisinput]["YD"] . Association[derivativebasisinput]["CD"]- Association[derivativebasisinput]["CQ"] . Association[derivativebasisinput]["YD"]),"ase\[Phi]"-> I (Association[derivativebasisinput]["YE"] . Association[derivativebasisinput]["CE"]- Association[derivativebasisinput]["CL"] . Association[derivativebasisinput]["YE"]),"asGt"->Association[derivativebasisinput]["g3"]^2/(16 Pi^2) * (Association[derivativebasisinput]["CG"] - 1/2 Tr[Association[derivativebasisinput]["CU"]+Association[derivativebasisinput]["CD"]-2Association[derivativebasisinput]["CQ"]]) ,"asWt"->Association[derivativebasisinput]["g2"]^2/(16 Pi^2) * (Association[derivativebasisinput]["CW"] + 1/2 Tr[ 3 * Association[derivativebasisinput]["CQ"]+Association[derivativebasisinput]["CL"]]),"asBt"->
+Association[derivativebasisinput]["g1"]^2/(16 Pi^2) * (Association[derivativebasisinput]["CB"] - Tr[ (4/3) * Association[derivativebasisinput]["CU"]+(1/3) Association[derivativebasisinput]["CD"]-(1/6) Association[derivativebasisinput]["CQ"]+ Association[derivativebasisinput]["CE"]-(1/2)-(1/6) Association[derivativebasisinput]["CL"]])}
 
 
 (* ::Input::Initialization:: *)
@@ -27163,7 +27178,7 @@ mu Yd11'[mu]==rg$Yd11,mu Ydbar11'[mu]==rg$Ydbar11,mu Yd12'[mu]==rg$Yd12,mu Ydbar
 
 (* ::Input::Initialization:: *)
 bsmHSparameters =Module[{highscale = 1000},
-Chop[Join[
+chop[Join[
     {ms2[\[CapitalLambda]]==100.`,                         \[Lambda]s[\[CapitalLambda]]==0,                                    \[Lambda]s\[Phi][\[CapitalLambda]]==0,                           \[Kappa]s[\[CapitalLambda]]==0,                                   \[Kappa]s\[Phi][\[CapitalLambda]]==0,                           as3[\[CapitalLambda]]==0,                    as[\[CapitalLambda]]==0,                    
 asBt[\[CapitalLambda]]==0,                        asWt[\[CapitalLambda]]==0,                                asGt[\[CapitalLambda]]==0,                        asB[\[CapitalLambda]]==0,                                 asW[\[CapitalLambda]]==0,                            asG[\[CapitalLambda]]==0,                    as5[\[CapitalLambda]]==0,                    
 ase\[Phi]11[\[CapitalLambda]]==0,                    ase\[Phi]bar11[\[CapitalLambda]]==0,                    ase\[Phi]12[\[CapitalLambda]]==0,                    ase\[Phi]bar12[\[CapitalLambda]]==0,                    ase\[Phi]13[\[CapitalLambda]]==0,                    ase\[Phi]bar13[\[CapitalLambda]]==0,                    
@@ -27176,7 +27191,7 @@ asu\[Phi]11[\[CapitalLambda]]==0,                    asu\[Phi]bar11[\[CapitalLam
 asu\[Phi]21[\[CapitalLambda]]==0,                    asu\[Phi]bar21[\[CapitalLambda]]==0,                    asu\[Phi]22[\[CapitalLambda]]==0,                    asu\[Phi]bar22[\[CapitalLambda]]==0,                    asu\[Phi]23[\[CapitalLambda]]==0,                    asu\[Phi]bar23[\[CapitalLambda]]==0,                    
 asu\[Phi]31[\[CapitalLambda]]==0,                    asu\[Phi]bar31[\[CapitalLambda]]==0,                    asu\[Phi]32[\[CapitalLambda]]==0,                    asu\[Phi]bar32[\[CapitalLambda]]==0,                    asu\[Phi]33[\[CapitalLambda]]==0,                    asu\[Phi]bar33[\[CapitalLambda]]==0}/.\[CapitalLambda]->highscale,
 
-Thread[((#[\[CapitalLambda]]&/@(Head[#]&/@vevscaleboundaryConditionSM[[All,1]]))/.\[CapitalLambda]->highscale)==(((#[\[CapitalLambda]]&/@(Head[#]&/@vevscaleboundaryConditionSM[[All,1]]))/.\[CapitalLambda]->highscale)/.rgeSMto\[CapitalLambda])]],10^-20 ]];
+Thread[((#[\[CapitalLambda]]&/@(Head[#]&/@vevscaleboundaryConditionSM[[All,1]]))/.\[CapitalLambda]->highscale)==(((#[\[CapitalLambda]]&/@(Head[#]&/@vevscaleboundaryConditionSM[[All,1]]))/.\[CapitalLambda]->highscale)/.rgeSMto\[CapitalLambda])]]]];
 
 
 (* ::Input::Initialization:: *)
@@ -27185,13 +27200,13 @@ varsPSEFT={ms2,\[Lambda]s,\[Lambda]s\[Phi],\[Kappa]s,\[Kappa]s\[Phi],as3,as,asBt
 
 (* ::Input::Initialization:: *)
 rgePSEFTreset[BC_,Hscale_,matscale_]:=Monitor[PrintTemporary["Running all paramaters from "<>ToString[Sort[{Hscale,matscale}][[2]]]<>" to " <>ToString[Sort[{Hscale,matscale}][[1]]] <>" GeV"];EchoTiming[
-rgePSEFT=Chop[
+rgePSEFT=chop[
 			NDSolve[
 				Join[toSolvingHERGEs,
 							    DeleteDuplicates@Join[BC,(DeleteCases[Thread[Keys[#]->(Conjugate[Values[#]])]&/@(BC/.Equal->Rule),
 									Alternatives@@{ms2[_]->_,\[Lambda]s[_]->_,\[Lambda]s\[Phi][_]->_,\[Kappa]s[_]->_,\[Kappa]s\[Phi][_]->_,as3[_]->_,as[_]->_,asBt[_]->_,asB[_]->_,asWt[_]->_,asW[_]->_,asGt[_]->_,asG[_]->_,as5[_]->_,Ye11[_]->_,Ye12[_]->_,Ye13[_]->_,Ye21[_]->_,Ye22[_]->_,Ye23[_]->_,Ye31[_]->_,Ye32[_]->_,Ye33[_]->_,Yd11[_]->_,Yd12[_]->_,Yd13[_]->_,Yd21[_]->_,Yd22[_]->_,Yd23[_]->_,Yd31[_]->_,Yd32[_]->_,Yd33[_]->_,Yu11[_]->_,Yu12[_]->_,Yu13[_]->_,Yu21[_]->_,Yu22[_]->_,Yu23[_]->_,Yu31[_]->_,Yu32[_]->_,Yu33[_]->_,Yebar11[_]->_,Yebar12[_]->_,Yebar13[_]->_,Yebar21[_]->_,Yebar22[_]->_,Yebar23[_]->_,Yebar31[_]->_,Yebar32[_]->_,Yebar33[_]->_,Ydbar11[_]->_,Ydbar12[_]->_,Ydbar13[_]->_,Ydbar21[_]->_,Ydbar22[_]->_,Ydbar23[_]->_,Ydbar31[_]->_,Ydbar32[_]->_,Ydbar33[_]->_,Yubar11[_]->_,Yubar12[_]->_,Yubar13[_]->_,Yubar21[_]->_,Yubar22[_]->_,Yubar23[_]->_,Yubar31[_]->_,Yubar32[_]->_,Yubar33[_]->_}]/.{asd\[Phi]11->asd\[Phi]bar11,asd\[Phi]12->asd\[Phi]bar12,asd\[Phi]13->asd\[Phi]bar13,asd\[Phi]21->asd\[Phi]bar21,asd\[Phi]22->asd\[Phi]bar22,asd\[Phi]23->asd\[Phi]bar23,asd\[Phi]31->asd\[Phi]bar31,asd\[Phi]32->asd\[Phi]bar32,asd\[Phi]33->asd\[Phi]bar33,asu\[Phi]11->asu\[Phi]bar11,asu\[Phi]12->asu\[Phi]bar12,asu\[Phi]13->asu\[Phi]bar13,asu\[Phi]21->asu\[Phi]bar21,asu\[Phi]22->asu\[Phi]bar22,asu\[Phi]23->asu\[Phi]bar23,asu\[Phi]31->asu\[Phi]bar31,asu\[Phi]32->asu\[Phi]bar32,asu\[Phi]33->asu\[Phi]bar33,ase\[Phi]11->ase\[Phi]bar11,ase\[Phi]12->ase\[Phi]bar12,ase\[Phi]13->ase\[Phi]bar13,ase\[Phi]21->ase\[Phi]bar21,ase\[Phi]22->ase\[Phi]bar22,ase\[Phi]23->ase\[Phi]bar23,ase\[Phi]31->ase\[Phi]bar31,ase\[Phi]32->ase\[Phi]bar32,ase\[Phi]33->ase\[Phi]bar33})/.Rule->Equal]				
 					],
-					varsPSEFT,{mu,matscale,Hscale},Method->{"EquationSimplification"->"Solve"}],10^-($MachinePrecision)][[1]]
+					varsPSEFT,{mu,matscale,Hscale},Method->{"EquationSimplification"->"Solve"}]][[1]]
 				]
 ,ListAnimate[iv$run,AnimationRate->28,ImageSize->Small,Paneled->False]/.HoldPattern[AppearanceElements->_]->(AppearanceElements->None)];
 
@@ -27220,7 +27235,7 @@ vaccumSolution:=Module[{rrmu,rr\[Lambda],interpolationpoints,polynomialinmuh2lam
 rrmu=RandomReal[{(\[Mu]H2[topmassscale]/.rgeSMto\[CapitalLambda])-.5(\[Mu]H2[topmassscale]/.rgeSMto\[CapitalLambda]),(\[Mu]H2[topmassscale]/.rgeSMto\[CapitalLambda])+(\[Mu]H2[topmassscale]/.rgeSMto\[CapitalLambda])},10];
 rr\[Lambda]=RandomReal[{0,(\[Lambda]\[Phi][topmassscale]/.rgeSMto\[CapitalLambda])+3(\[Lambda]\[Phi][topmassscale]/.rgeSMto\[CapitalLambda])},10];
 interpolationpoints=With[{mu=1000,topmass=172},
-Table[{{muh2,lamphi},Chop[(#[topmass]&/@rgePSEFTparamsolve[(\[Mu]H2[mu]/.rgeSMto\[CapitalLambda]),(\[Lambda]\[Phi][mu]/.rgeSMto\[CapitalLambda])]),10^(-$MachinePrecision)]},{muh2,rrmu},{lamphi,rr\[Lambda]}]];
+Table[{{muh2,lamphi},chop[(#[topmass]&/@rgePSEFTparamsolve[(\[Mu]H2[mu]/.rgeSMto\[CapitalLambda]),(\[Lambda]\[Phi][mu]/.rgeSMto\[CapitalLambda])])]},{muh2,rrmu},{lamphi,rr\[Lambda]}]];
 polynomialinmuh2lamphi1=Table[varsPSEFT[[k]]->InterpolatingPolynomial[Flatten[Table[{interpolationpoints[[i,j,1]],interpolationpoints[[i,j,2,k]]},{i,Dimensions[interpolationpoints][[1]]},{j,Dimensions[interpolationpoints][[2]]}],1],{muh2,lamphi}],{k,Length@varsPSEFT}];
 theequations1=({(-\[Mu]H2 + \[Lambda]\[Phi] V\[Phi]^2 + 1/2 Vs (2 \[Kappa]s\[Phi]  + \[Lambda]s\[Phi]  Vs) - as  V\[Phi]^2 Vs - as3  Vs^3),
 -125.44^2+2\[Lambda]\[Phi]  V\[Phi]^2- 2 as V\[Phi]^2 Vs+2/V\[Phi] (2 ms2  Vs + \[Kappa]s  Vs^2 + \[Lambda]s /3 Vs^3 + as V\[Phi]^4/2 -10 as5 Vs^4)*1/2*ArcTan[((-2 as V\[Phi]^4+40 as5 Vs^4-4/3 Vs(6 ms2 +3\[Kappa]s  Vs + \[Lambda]s  Vs^2))/(V\[Phi]((4 as  - 6 as3 ) V\[Phi]^2 Vs - 40 as5  Vs^3+2 ms2  + (-4\[Lambda]\[Phi] +\[Lambda]s\[Phi] )Vs^2+Vs(2\[Kappa]s +\[Lambda]s  Vs))))],
@@ -27234,7 +27249,7 @@ iv$lst2={V\[Phi]->vacexpvalue,WC\[Theta][topmassscale]->1/2*ArcTan[((-2 as V\[Ph
 
 
 (* ::Input::Initialization:: *)
-VCKM=Chop@Module[{ckm\[Theta]12=  13.04Degree,ckm\[Theta]13=  0.201Degree, ckm\[Theta]23= 2.38Degree, ckmdelta13=68.8Degree},({{1,0,0},{0,Cos@ckm\[Theta]23,Sin@ckm\[Theta]23},{0,-Sin@ckm\[Theta]23,Cos@ckm\[Theta]23}}) . ({{Cos@ckm\[Theta]13,0,Sin@ckm\[Theta]13 Exp[-I ckmdelta13]},{0,1,0},{-Sin@ckm\[Theta]13  Exp[I ckmdelta13],0,Cos@ckm\[Theta]13}}) . {{Cos@ckm\[Theta]12,Sin@ckm\[Theta]12,0},{-Sin@ckm\[Theta]12,Cos@ckm\[Theta]12,0},{0,0,1}}];
+VCKM=Module[{ckm\[Theta]12=  13.04Degree,ckm\[Theta]13=  0.201Degree, ckm\[Theta]23= 2.38Degree, ckmdelta13=68.8Degree},({{1,0,0},{0,Cos@ckm\[Theta]23,Sin@ckm\[Theta]23},{0,-Sin@ckm\[Theta]23,Cos@ckm\[Theta]23}}) . ({{Cos@ckm\[Theta]13,0,Sin@ckm\[Theta]13 Exp[-I ckmdelta13]},{0,1,0},{-Sin@ckm\[Theta]13  Exp[I ckmdelta13],0,Cos@ckm\[Theta]13}}) . {{Cos@ckm\[Theta]12,Sin@ckm\[Theta]12,0},{-Sin@ckm\[Theta]12,Cos@ckm\[Theta]12,0},{0,0,1}}];
 
 
 (* ::Input::Initialization:: *)
@@ -27922,31 +27937,31 @@ ListAnimate[iv$run,AnimationRate->28,ImageSize->Small,Paneled->False]/.HoldPatte
 boundaryConditionLE=PSLEFTmatchingVS/.rgePSEFT;
 intVar$b={MU11,MU12,MU13,MU21,MU22,MU23,MU31,MU32,MU33,MUbar11,MUbar12,MUbar13,MUbar21,MUbar22,MUbar23,MUbar31,MUbar32,MUbar33,MD11,MD12,MD13,MD21,MD22,MD23,MD31,MD32,MD33,MDbar11,MDbar12,MDbar13,MDbar21,MDbar22,MDbar23,MDbar31,MDbar32,MDbar33,ML11,ML12,ML13,ML21,ML22,ML23,ML31,ML32,ML33,MLbar11,MLbar12,MLbar13,MLbar21,MLbar22,MLbar23,MLbar31,MLbar32,MLbar33,WCOscu11,WCOscu12,WCOscu13,WCOscu21,WCOscu22,WCOscu23,WCOscu31,WCOscu32,WCOscu33,WCOscubar11,WCOscubar12,WCOscubar13,WCOscubar21,WCOscubar22,WCOscubar23,WCOscubar31,WCOscubar32,WCOscubar33,WCOscd11,WCOscd12,WCOscd13,WCOscd21,WCOscd22,WCOscd23,WCOscd31,WCOscd32,WCOscd33,WCOscdbar11,WCOscdbar12,WCOscdbar13,WCOscdbar21,WCOscdbar22,WCOscdbar23,WCOscdbar31,WCOscdbar32,WCOscdbar33,WCOsce11,WCOsce12,WCOsce13,WCOsce21,WCOsce22,WCOsce23,WCOsce31,WCOsce32,WCOsce33,WCOscebar11,WCOscebar12,WCOscebar13,WCOscebar21,WCOscebar22,WCOscebar23,WCOscebar31,WCOscebar32,WCOscebar33,WCOuGt11,WCOuGt12,WCOuGt13,WCOuGt21,WCOuGt22,WCOuGt23,WCOuGt31,WCOuGt32,WCOuGt33,WCOuGtbar11,WCOuGtbar12,WCOuGtbar13,WCOuGtbar21,WCOuGtbar22,WCOuGtbar23,WCOuGtbar31,WCOuGtbar32,WCOuGtbar33,WCOdGt11,WCOdGt12,WCOdGt13,WCOdGt21,WCOdGt22,WCOdGt23,WCOdGt31,WCOdGt32,WCOdGt33,WCOdGtbar11,WCOdGtbar12,WCOdGtbar13,WCOdGtbar21,WCOdGtbar22,WCOdGtbar23,WCOdGtbar31,WCOdGtbar32,WCOdGtbar33,WCOuAt11,WCOuAt12,WCOuAt13,WCOuAt21,WCOuAt22,WCOuAt23,WCOuAt31,WCOuAt32,WCOuAt33,WCOuAtbar11,WCOuAtbar12,WCOuAtbar13,WCOuAtbar21,WCOuAtbar22,WCOuAtbar23,WCOuAtbar31,WCOuAtbar32,WCOuAtbar33,WCOdAt11,WCOdAt12,WCOdAt13,WCOdAt21,WCOdAt22,WCOdAt23,WCOdAt31,WCOdAt32,WCOdAt33,WCOdAtbar11,WCOdAtbar12,WCOdAtbar13,WCOdAtbar21,WCOdAtbar22,WCOdAtbar23,WCOdAtbar31,WCOdAtbar32,WCOdAtbar33,WCOeAt11,WCOeAt12,WCOeAt13,WCOeAt21,WCOeAt22,WCOeAt23,WCOeAt31,WCOeAt32,WCOeAt33,WCOeAtbar11,WCOeAtbar12,WCOeAtbar13,WCOeAtbar21,WCOeAtbar22,WCOeAtbar23,WCOeAtbar31,WCOeAtbar32,WCOeAtbar33,WCOs2u11,WCOs2u12,WCOs2u13,WCOs2u21,WCOs2u22,WCOs2u23,WCOs2u31,WCOs2u32,WCOs2u33,WCOs2ubar11,WCOs2ubar12,WCOs2ubar13,WCOs2ubar21,WCOs2ubar22,WCOs2ubar23,WCOs2ubar31,WCOs2ubar32,WCOs2ubar33,WCOs2d11,WCOs2d12,WCOs2d13,WCOs2d21,WCOs2d22,WCOs2d23,WCOs2d31,WCOs2d32,WCOs2d33,WCOs2dbar11,WCOs2dbar12,WCOs2dbar13,WCOs2dbar21,WCOs2dbar22,WCOs2dbar23,WCOs2dbar31,WCOs2dbar32,WCOs2dbar33,WCOs2e11,WCOs2e12,WCOs2e13,WCOs2e21,WCOs2e22,WCOs2e23,WCOs2e31,WCOs2e32,WCOs2e33,WCOs2ebar11,WCOs2ebar12,WCOs2ebar13,WCOs2ebar21,WCOs2ebar22,WCOs2ebar23,WCOs2ebar31,WCOs2ebar32,WCOs2ebar33,WCms2,WC\[Kappa]s,WC\[Lambda]s,WCOsA,WCOsAt,WCOsG,WCOsGt,WCOs5,WCgem,WCg3,WC\[Theta]QCD};
 
-rgeLEreset[BC_,HS_,LS_]:=Monitor[PrintTemporary["Running PSLEFT paramaters ..."];EchoTiming[rgeLE=Chop[NDSolve[Join[toSolvingLERGEs,BC],
-intVar$b,{mu,HS,LS},Method->{"EquationSimplification"->"Solve"}],10^-($MachinePrecision)][[1]]],
+rgeLEreset[BC_,HS_,LS_]:=Monitor[PrintTemporary["Running PSLEFT paramaters ..."];EchoTiming[rgeLE=chop[NDSolve[Join[toSolvingLERGEs,BC],
+intVar$b,{mu,HS,LS},Method->{"EquationSimplification"->"Solve"}]][[1]]],
 ListAnimate[iv$run,AnimationRate->28,ImageSize->Small,Paneled->False]/.HoldPattern[AppearanceElements->_]->(AppearanceElements->None)];
 
 
 (* ::Input::Initialization:: *)
-rotatetoMassBasis[aa_]:=Module[{iii,jjj},
-{fermionmassmatrixUsq,fermionRotationVuL}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@Eigensystem[(Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}] . ConjugateTranspose[Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE],10^-15]);
+(*rotatetoMassBasis[aa_]:=Module[{iii,jjj},
+{fermionmassmatrixUsq,fermionRotationVuL}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@Eigensystem[(Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}].ConjugateTranspose[Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE],10^-15]);
 
-{fermionmassmatrixUsq,fermionRotationVuR}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@(Eigensystem[(ConjugateTranspose[Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]] . Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}])/. rgeLE]),10^-15]);
+{fermionmassmatrixUsq,fermionRotationVuR}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@(Eigensystem[(ConjugateTranspose[Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]].Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}])/. rgeLE]),10^-15]);
 
-{fermionmassmatrixDsq,fermionRotationVdL}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@Eigensystem[(Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}] . ConjugateTranspose[Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE],10^-15]);
+{fermionmassmatrixDsq,fermionRotationVdL}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@Eigensystem[(Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}].ConjugateTranspose[Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE],10^-15]);
 
-{fermionmassmatrixDsq,fermionRotationVdR}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@(Eigensystem[(ConjugateTranspose[Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]] . Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}])/. rgeLE]),10^-15]);
+{fermionmassmatrixDsq,fermionRotationVdR}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@(Eigensystem[(ConjugateTranspose[Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]].Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}])/. rgeLE]),10^-15]);
 
-{fermionmassmatrixEsq,fermionRotationVeL}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@Eigensystem[(Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}] . ConjugateTranspose[Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE],10^-15]);
+{fermionmassmatrixEsq,fermionRotationVeL}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@Eigensystem[(Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}].ConjugateTranspose[Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE],10^-15]);
 
-{fermionmassmatrixEsq,fermionRotationVeR}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@(Eigensystem[(ConjugateTranspose[Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]] . Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}])/. rgeLE]),10^-15]);
+{fermionmassmatrixEsq,fermionRotationVeR}={#[[1]],Transpose[#[[2]]]}&@(Chop[Reverse/@(Eigensystem[(ConjugateTranspose[Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]].Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}])/. rgeLE]),10^-15]);
 
 ]
-MassMatrixU[aa_]:=Module[{iii,jjj},(DiagonalMatrix[Sqrt/@(Reverse/@Eigensystem[(Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][5],{iii,3},{jjj,3}] . ConjugateTranspose[Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE])[[1]]])]
+MassMatrixU[aa_]:=Module[{iii,jjj},(DiagonalMatrix[Sqrt/@(Reverse/@Eigensystem[(Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][5],{iii,3},{jjj,3}].ConjugateTranspose[Table[ToExpression["MU"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE])[[1]]])]
 
-MassMatrixD[aa_]:=Module[{iii,jjj},(DiagonalMatrix[Sqrt/@(Reverse/@Eigensystem[(Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][5],{iii,3},{jjj,3}] . ConjugateTranspose[Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE])[[1]]])]
+MassMatrixD[aa_]:=Module[{iii,jjj},(DiagonalMatrix[Sqrt/@(Reverse/@Eigensystem[(Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][5],{iii,3},{jjj,3}].ConjugateTranspose[Table[ToExpression["MD"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE])[[1]]])]
 
-MassMatrixL[aa_]:=Module[{iii,jjj},(DiagonalMatrix[Sqrt/@(Reverse/@Eigensystem[(Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][5],{iii,3},{jjj,3}] . ConjugateTranspose[Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE])[[1]]])]
+MassMatrixL[aa_]:=Module[{iii,jjj},(DiagonalMatrix[Sqrt/@(Reverse/@Eigensystem[(Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][5],{iii,3},{jjj,3}].ConjugateTranspose[Table[ToExpression["ML"<>ToString[iii]<>ToString[jjj]][aa],{iii,3},{jjj,3}]])/. rgeLE])[[1]]])]
 
 CouplingMatrixU[aa_]:= Module[{},
 rotatetoMassBasis[aa];
@@ -27961,7 +27976,7 @@ rotatetoMassBasis[aa];
 CouplingMatrixL[aa_]:= Module[{},
 rotatetoMassBasis[aa];
 (ConjugateTranspose[fermionRotationVeL] . {{WCOsce11[aa],WCOsce12[aa],WCOsce13[aa]},{WCOsce21[aa],WCOsce22[aa],WCOsce23[aa]},{WCOsce31[aa],WCOsce32[aa],WCOsce33[aa]}} . fermionRotationVeR)
-]
+]*)
 
 
 (*D Block*)
