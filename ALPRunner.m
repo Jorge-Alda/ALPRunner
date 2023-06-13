@@ -5492,6 +5492,7 @@ changeBasis::usage="WCs basis change from derivative basis to singlet basis."
 derivativebasisinput::usage="WCs for changeBasis input"
 dbinputtemplate::usage="WCs for changeBasis input"
 bcLE::usage="Low energy boundary conditions"
+scanHEspace::usage="Scan HE parameter space"
 
 
 (* ::Input::Initialization:: *)
