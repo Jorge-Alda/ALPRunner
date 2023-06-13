@@ -5491,6 +5491,7 @@ rgePSEFTparamreset::usage="Parametric RGE Solve reset"
 changeBasis::usage="WCs basis change from derivative basis to singlet basis."
 derivativebasisinput::usage="WCs for changeBasis input"
 dbinputtemplate::usage="WCs for changeBasis input"
+bcLE::usage="Low energy boundary conditions"
 
 
 (* ::Input::Initialization:: *)
@@ -27942,6 +27943,16 @@ intVar$b,{mu,HS,LS},Method->{"EquationSimplification"->"Solve"}]][[1]]],
 ListAnimate[iv$run,AnimationRate->28,ImageSize->Small,Paneled->False]/.HoldPattern[AppearanceElements->_]->(AppearanceElements->None)];
 
 
+(* ::Input::Initialization:: *)
+bcLE[mat_,rges_,list_]:=Module[{uvparamvaluelist,solveVsNP,npparamters,mixang},
+
+uvparamvaluelist=(#[172]&/@rges@@list);
+solveVsNP=FindRoot[(- 2 ms2  Vs-\[Kappa]s\[Phi] V\[Phi]^2 -\[Lambda]s\[Phi]  V\[Phi]^2 Vs  -\[Kappa]s Vs^2 -\[Lambda]s /3 Vs^3 +as /2 V\[Phi]^4+ 3 as3   V\[Phi]^2 Vs^2  +10 as5  Vs^4)/.V\[Phi]->246/.chop@Thread[(varsPSEFT)->uvparamvaluelist],{Vs,0}];
+npparamters=Thread[(#[172]&/@varsPSEFT)->uvparamvaluelist];
+mixang={WC\[Theta][172]->1/2*ArcTan[((-2 as V\[Phi]^4+40 as5 Vs^4-4/3 Vs(6 ms2 +3\[Kappa]s  Vs + \[Lambda]s  Vs^2))/(V\[Phi]((4 as  - 6 as3 ) V\[Phi]^2 Vs - 40 as5  Vs^3+2 ms2  + (-4\[Lambda]\[Phi] +\[Lambda]s\[Phi] )Vs^2+Vs(2\[Kappa]s +\[Lambda]s  Vs))))]/.(npparamters/.aa_[172]:>aa)/.solveVsNP/.V\[Phi]->246};
+ chop[PSLEFTmatching[172]/.V\[Phi]->246/.solveVsNP/.npparamters/.mixang]/.\[Theta]QCD[172]->0]
+
+
 (*D Block*)
 Id1[aD_,Yd_]:=Re[Tr[aD . ConjugateTranspose[Yd]]]
 Id2[aD_,Yd_]:=Re[Tr[Yd . ConjugateTranspose[Yd] . aD . ConjugateTranspose[Yd]]]
@@ -27963,6 +27974,332 @@ Iud4[aD_,aU_,Yd_,Yu_]:=Im[Tr[MatrixPower[(Yu . ConjugateTranspose[Yu] . Yd . Con
 Ie1[aE_,Ye_]:=Re[Tr[aE . ConjugateTranspose[Ye]]]
 Ie2[aE_,Ye_]:=Re[Tr[aE . ConjugateTranspose[Ye] . aE . ConjugateTranspose[Ye]]]
 Ie3[aE_,Ye_]:=Re[Tr[aE . ConjugateTranspose[Ye] . aE . ConjugateTranspose[Ye] . aE . ConjugateTranspose[Ye]]]
+
+
+(* ::Input::Initialization:: *)
+scanHEspace[bsmBC_,Lam_,MatScale_,computeScale_,paramlist_,window_,Observable_,filename_]:=
+Module[{\[Alpha]em=WCgem^2/(4\[Pi]),\[Alpha]3=WCg3^2/(4\[Pi]),QU={2/3,2/3},QD={-1/3,-1/3,-1/3},QL={-1,-1,-1},hbarc=197.3269804*10^6*10^-15*10^-9 (* Factor required to convert from natural units in GeV^-1 to IS units in m. *),
+DHgOVEReEXP=(6*10^-32(* m *))/hbarc (* GeV^-1*),DnOVEReEXP=(1.8*10^-28(* m *))/hbarc  (* GeV^-1 *),\[Omega]ThOEXP=1.3(* mrad/s *),L,F,G,H,f,g,h,l,FunctionsRule,
+datalist\[Omega]ThO={},datalist\[Omega]ThO2={},datalistdHg={},datalistdHg2={},datalistdn={},datalistdn2={},randompoints,List1,RulePackage},
+
+L[x_]:=(3-4x+x^2 +2Log[x])/(1-x)^3;
+F[z_]:=1/2 z NIntegrate[(1-2x(1-x))/(x(1-x)-z) Log[(x(1-x))/z],{x,0,1}];
+G[z_]:=1/2 z NIntegrate[1/(x(1-x)-z) Log[(x(1-x))/z],{x,0,1}];
+H[z_]:=NIntegrate[1+(z^2 u^3 x^3 (1-x))/(z x(1-u x)+(1-u)(1-x))^2,{u,0,1},{x,0,1},Method->{"GlobalAdaptive","SingularityHandler"->"DuffyCoordinates"}];
+FunctionsRule={f->F,g->G,h->H,l->L};
+
+randompoints=Table[{RandomReal[window[[2,1]]],RandomReal[window[[2,2]]]},{n1,window[[1]]}];
+
+rgePSEFTparamsolvereset[bsmBC,Lam,MatScale, paramlist];
+
+Do[
+solveVsNP=FindRoot[(- 2 ms2  Vs-\[Kappa]s\[Phi] V\[Phi]^2 -\[Lambda]s\[Phi]  V\[Phi]^2 Vs  -\[Kappa]s Vs^2 -\[Lambda]s /3 Vs^3 +as /2 V\[Phi]^4+ 3 as3   V\[Phi]^2 Vs^2
+ +10 as5  Vs^4)/.V\[Phi]->246/.chop[Thread[(varsPSEFT)->(#[MatScale]&/@rgePSEFTparamsolve[ randompoints[[n1,1]], randompoints[[n1,2]]])]],{Vs,0}];
+npparamters=chop[Thread[(#[MatScale]&/@varsPSEFT)->(#[MatScale]&/@rgePSEFTparamsolve[(*(mass^2),*)randompoints[[n1,1]],
+randompoints[[n1,2]]])]];
+mixang={WC\[Theta][MatScale]->1/2*ArcTan[((-2 as V\[Phi]^4+40 as5 Vs^4-4/3 Vs(6 ms2 +3\[Kappa]s  Vs + \[Lambda]s  Vs^2))/(V\[Phi]((4 as  - 6 as3 ) V\[Phi]^2 Vs - 40 as5  Vs^3+2 ms2  + (-4\[Lambda]\[Phi] +\[Lambda]s\[Phi] )Vs^2+Vs(2\[Kappa]s +\[Lambda]s  Vs))))]/.(npparamters/.aa_[MatScale]->aa)/.solveVsNP/.V\[Phi]->246};
+
+(*-----------------HIGH ENERGY EFT RUNNING AND MASS DIAGONALIZATION------------------------- *)
+
+solveVsNP=FindRoot[(- 2 ms2  Vs-\[Kappa]s\[Phi] V\[Phi]^2 -\[Lambda]s\[Phi]  V\[Phi]^2 Vs  -\[Kappa]s Vs^2 -\[Lambda]s /3 Vs^3 +as /2 V\[Phi]^4+ 3 as3   V\[Phi]^2 Vs^2 +10 as5  Vs^4)/.V\[Phi]->245.999/.chop[Thread[(varsPSEFT)->(#[MatScale]&/@rgePSEFTparamsolve[(* asd\[Phi]11p *)randompoints[[n1,1]],(* asd\[Phi]13p *) randompoints[[n1,2]]])]],{Vs,0}];
+
+npparamters00=chop[Thread[(#[MatScale]&/@varsPSEFT)->(#[MatScale]&/@rgePSEFTparamsolve[(* asd\[Phi]11p *)randompoints[[n1,1]],(* asd\[Phi]13p *) randompoints[[n1,2]]])]];
+
+mixang={WC\[Theta][MatScale]->1/2*ArcTan[((-2 as V\[Phi]^4+40 as5 Vs^4-4/3 Vs(6 ms2 +3\[Kappa]s  Vs + \[Lambda]s  Vs^2))/(V\[Phi]((4 as  - 6 as3 ) V\[Phi]^2 Vs - 40 as5  Vs^3+2 ms2  + (-4\[Lambda]\[Phi] +\[Lambda]s\[Phi] )Vs^2+Vs(2\[Kappa]s +\[Lambda]s  Vs))))]/.(npparamters00/.aa_[MatScale]->aa)/.solveVsNP/.V\[Phi]->245.999};
+
+ivrMUHAT=Partition[PSLEFTmatching[MatScale][[;;9]][[All,2]],3]/.V\[Phi]->245.999/.solveVsNP/.npparamters00/.mixang /.\[Theta]QCD[MatScale]->0;
+ivrMDHAT=Partition[PSLEFTmatching[MatScale][[19;;27]][[All,2]],3]/.V\[Phi]->245.999/.solveVsNP/.npparamters00/.mixang /.\[Theta]QCD[MatScale]->0;
+ivrMLHAT=Partition[PSLEFTmatching[MatScale][[37;;45]][[All,2]],3]/.V\[Phi]->245.999/.solveVsNP/.npparamters00/.mixang /.\[Theta]QCD[MatScale]->0;
+
+{fermionmassmatrixU,AuL}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@Eigensystem[chop[( ivrMUHAT . ConjugateTranspose[ivrMUHAT])]]);
+{fermionmassmatrixU,AuR}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@(Eigensystem[chop[(ConjugateTranspose[ivrMUHAT] . ivrMUHAT )]]));
+{fermionmassmatrixD,AdL}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@Eigensystem[chop[(ivrMDHAT . ConjugateTranspose[ivrMDHAT])]]);
+{fermionmassmatrixD,AdR}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@(Eigensystem[chop[(ConjugateTranspose[ivrMDHAT] . ivrMDHAT)]]));
+{fermionmassmatrixE,AeL}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@Eigensystem[chop[(ivrMLHAT . ConjugateTranspose[ivrMLHAT])]]);
+{fermionmassmatrixE,AeR}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@(Eigensystem[chop[(ConjugateTranspose[ivrMLHAT] . ivrMLHAT)]]));
+
+$Assumptions={\[Delta]uL1\[Element]Reals,\[Delta]uL2\[Element]Reals,\[Delta]uL3\[Element]Reals,\[Delta]uR1\[Element]Reals,\[Delta]uR2\[Element]Reals,\[Delta]uR3\[Element]Reals,\[Delta]dL1\[Element]Reals,\[Delta]dL2\[Element]Reals,\[Delta]dL3\[Element]Reals,\[Delta]dR1\[Element]Reals,\[Delta]dR2\[Element]Reals,\[Delta]dR3\[Element]Reals,\[Delta]eL1\[Element]Reals,\[Delta]eL2\[Element]Reals,\[Delta]eL3\[Element]Reals,\[Delta]eR1\[Element]Reals,\[Delta]eR2\[Element]Reals,\[Delta]eR3\[Element]Reals};
+
+KdL=DiagonalMatrix[{Exp[I \[Delta]dL1],Exp[I \[Delta]dL2],Exp[I \[Delta]dL3]}];
+KdR=DiagonalMatrix[{Exp[I \[Delta]dR1],Exp[I \[Delta]dR2],Exp[I \[Delta]dR3]}];
+KuL=DiagonalMatrix[{Exp[I \[Delta]uL1],Exp[I \[Delta]uL2],Exp[I \[Delta]uL3]}];
+KuR=DiagonalMatrix[{Exp[I \[Delta]uR1],Exp[I \[Delta]uR2],Exp[I \[Delta]uR3]}];
+KeL=DiagonalMatrix[{Exp[I \[Delta]eL1],Exp[I \[Delta]eL2],Exp[I \[Delta]eL3]}];
+KeR=DiagonalMatrix[{Exp[I \[Delta]eR1],Exp[I \[Delta]eR2],Exp[I \[Delta]eR3]}];
+
+LHSKd=Simplify[ConjugateTranspose[KdL] . ConjugateTranspose[AdL] . ivrMDHAT . AdR . KdR,Assumptions->$Assumptions]//chopYuk;
+LHSKu=Simplify[ConjugateTranspose[KuL] . ConjugateTranspose[AuL] . ivrMUHAT . AuR . KuR,Assumptions->$Assumptions]//chopYuk;
+LHSKe=Simplify[ConjugateTranspose[KeL] . ConjugateTranspose[AeL] . ivrMLHAT . AeR . KeR,Assumptions->$Assumptions]//chopYuk;
+
+SolKdRot=(Quiet@NSolve[LHSKd==DiagonalMatrix[Sqrt[fermionmassmatrixD]],{\[Delta]dL1,\[Delta]dL2,\[Delta]dL3}]//chopYuk)[[1]];
+SolKuRot=(Quiet@NSolve[LHSKu==DiagonalMatrix[Sqrt[fermionmassmatrixU]],{\[Delta]uL1,\[Delta]uL2,\[Delta]uL3}]//chopYuk)[[1]];
+SolKeRot=(Quiet@NSolve[LHSKe==DiagonalMatrix[Sqrt[fermionmassmatrixE]],{\[Delta]eL1,\[Delta]eL2,\[Delta]eL3}]//chopYuk)[[1]];
+
+FinalVdL=Simplify[(AdL . KdL)/.SolKdRot//chop,Assumptions->$Assumptions];
+FinalVdR=Simplify[(AdR . KdR)/.SolKdRot//chop,Assumptions->$Assumptions];
+FinalVuL=Simplify[(AuL . KuL)/.SolKuRot//chop,Assumptions->$Assumptions];
+FinalVuR=Simplify[(AuR . KuR)/.SolKuRot//chop,Assumptions->$Assumptions];
+FinalVeL=Simplify[(AeL . KeL)/.SolKeRot//chop,Assumptions->$Assumptions];
+FinalVeR=Simplify[(AeR . KeR)/.SolKeRot//chop,Assumptions->$Assumptions];
+
+RuleDet=Quiet@NSolve[{Det[FinalVdL]==1,Det[FinalVuL]==1,Det[FinalVeL]==1},{\[Delta]uR1,\[Delta]dR1,\[Delta]eR1}][[1]];
+
+VCKMdagger=((ConjugateTranspose[AdL . KdL] . AuL . KuL)/.SolKdRot/.SolKuRot/.RuleDet)//Simplify//Chop;
+
+RuleCKM=Quiet@NSolve[{VCKMdagger[[1,1]]==ConjugateTranspose[VCKM][[1,1]],VCKMdagger[[2,1]]==ConjugateTranspose[VCKM][[2,1]],VCKMdagger[[3,2]]==ConjugateTranspose[VCKM][[3,2]],VCKMdagger[[3,3]]==ConjugateTranspose[VCKM][[3,3]]},{\[Delta]dR2,\[Delta]uR2,\[Delta]dR3,\[Delta]uR3}][[1]]//Chop;
+Rule\[Delta]e={\[Delta]eR2->0,\[Delta]eR3->0};
+
+VCKMphy=(ConjugateTranspose[VCKMdagger]/.RuleCKM//Chop);
+
+fermionRotationVdL=Simplify[(AdL . KdL)/.SolKdRot/.RuleDet/.RuleCKM//chop, Assumptions->$Assumptions];
+fermionRotationVdR=Simplify[(AdR . KdR)/.SolKdRot/.RuleDet/.RuleCKM//chop, Assumptions->$Assumptions];
+fermionRotationVuL=Simplify[(AuL . KuL)/.SolKuRot/.RuleDet/.RuleCKM//chop, Assumptions->$Assumptions];
+fermionRotationVuR=Simplify[(AuR . KuR)/.SolKuRot/.RuleDet/.RuleCKM//chop, Assumptions->$Assumptions];
+fermionRotationVeL=Simplify[(AeL . KeL)/.SolKeRot/.RuleDet/.Rule\[Delta]e//chop, Assumptions->$Assumptions];
+fermionRotationVeR=Simplify[(AeR . KeR)/.SolKeRot/.RuleDet/.Rule\[Delta]e//chop, Assumptions->$Assumptions];
+
+diagmassu=chop[ConjugateTranspose[fermionRotationVuL] . ivrMUHAT . fermionRotationVuR];
+diagmassd=chop[ConjugateTranspose[fermionRotationVdL] . ivrMDHAT . fermionRotationVdR];
+diagmasse=chop[ConjugateTranspose[fermionRotationVeL] . ivrMLHAT . fermionRotationVeR];
+
+
+rulediag0=Join[
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["Yu"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["Yu"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Flatten[(chop[ConjugateTranspose[fermionRotationVuL] . (Table[ToExpression["Yu"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVuR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["Yd"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["Yd"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Flatten[(chop[ConjugateTranspose[fermionRotationVdL] . (Table[ToExpression["Yd"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVdR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["Ye"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["Ye"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Flatten[(chop[ConjugateTranspose[fermionRotationVeL] . (Table[ToExpression["Ye"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVeR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["asu\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["asu\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Flatten[(chop[ConjugateTranspose[fermionRotationVuL] . (Table[ToExpression["asu\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVuR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["asd\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["asd\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Flatten[(chop[ConjugateTranspose[fermionRotationVdL] . (Table[ToExpression["asd\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVdR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["ase\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["ase\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Flatten[(chop[ConjugateTranspose[fermionRotationVeL] . (Table[ToExpression["ase\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVeR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["Yubar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["Yubar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Conjugate@Flatten[(chop[ConjugateTranspose[fermionRotationVuL] . (Table[ToExpression["Yu"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVuR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["Ydbar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["Ydbar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Conjugate@Flatten[(chop[ConjugateTranspose[fermionRotationVdL] . (Table[ToExpression["Yd"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVdR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["Yebar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["Yebar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Conjugate@Flatten[(chop[ConjugateTranspose[fermionRotationVeL] . (Table[ToExpression["Ye"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVeR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["asu\[Phi]bar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["asu\[Phi]bar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Conjugate@Flatten[(chop[ConjugateTranspose[fermionRotationVuL] . (Table[ToExpression["asu\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVuR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["asd\[Phi]bar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["asd\[Phi]bar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Conjugate@Flatten[(chop[ConjugateTranspose[fermionRotationVdL] . (Table[ToExpression["asd\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVdR])]]]],
+chop@Flatten[Thread[Thread[Flatten[Table[ToExpression["ase\[Phi]bar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->_]->Thread[Flatten[Table[ToExpression["ase\[Phi]bar"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]]->Conjugate@Flatten[(chop[ConjugateTranspose[fermionRotationVeL] . (Table[ToExpression["ase\[Phi]"<>ToString[i]<>ToString[j]<>"["<>ToString[MatScale]<>"]"],{i,3},{j,3}]/.npparamters00) . fermionRotationVeR])]]]]
+];
+
+npparamters = npparamters00/.rulediag0;
+
+
+(*--------------------------INTEGRATE TOP QUARK-------------------------------------------- *)
+
+topintegrate=Join[
+Table[(ToExpression["Yu3"<>ToString[i]<>"["<>ToString[MatScale]<>"]"]->_)->(ToExpression["Yu3"<>ToString[i]<>"["<>ToString[MatScale]<>"]"]->0),{i,3}],
+Table[(ToExpression["Yubar3"<>ToString[i]<>"["<>ToString[MatScale]<>"]"]->_)->(ToExpression["Yubar3"<>ToString[i]<>"["<>ToString[MatScale]<>"]"]->0),{i,3}],
+Table[(ToExpression["Yu"<>ToString[i]<>"3"<>"["<>ToString[MatScale]<>"]"]->_)->(ToExpression["Yu"<>ToString[i]<>"3"<>"["<>ToString[MatScale]<>"]"]->0),{i,2}],
+Table[(ToExpression["Yubar"<>ToString[i]<>"3"<>"["<>ToString[MatScale]<>"]"]->_)->(ToExpression["Yubar"<>ToString[i]<>"3"<>"["<>ToString[MatScale]<>"]"]->0),{i,2}],
+Table[(ToExpression["asu\[Phi]3"<>ToString[i]<>"["<>ToString[MatScale]<>"]"]->_)->(ToExpression["asu\[Phi]3"<>ToString[i]<>"["<>ToString[MatScale]<>"]"]->0),{i,3}],
+Table[(ToExpression["asu\[Phi]bar3"<>ToString[i]<>"["<>ToString[MatScale]<>"]"]->_)->(ToExpression["asu\[Phi]bar3"<>ToString[i]<>"["<>ToString[MatScale]<>"]"]->0),{i,3}],
+Table[(ToExpression["asu\[Phi]"<>ToString[i]<>"3"<>"["<>ToString[MatScale]<>"]"]->_)->(ToExpression["asu\[Phi]"<>ToString[i]<>"3"<>"["<>ToString[MatScale]<>"]"]->0),{i,2}],
+Table[(ToExpression["asu\[Phi]bar"<>ToString[i]<>"3"<>"["<>ToString[MatScale]<>"]"]->_)->(ToExpression["asu\[Phi]bar"<>ToString[i]<>"3"<>"["<>ToString[MatScale]<>"]"]->0),{i,2}]
+];
+
+boundaryConditionLE=(chop[(PSLEFTmatchingVS[MatScale]/.solveVsNP/.(npparamters/.topintegrate)/.mixang/.\[Theta]QCD[MatScale]->0)]/.V\[Phi]->245.999);
+rgeLEreset[boundaryConditionLE,MatScale,computeScale];
+
+List1={randompoints[[n1,1]],randompoints[[n1,2]],rgeLE};
+
+RulePackage=chop[(Thread[(#[computeScale])&/@List1[[3]][[All,1]]->((#[computeScale])&/@List1[[3]][[All,1]]/.List1[[3]])])]//.{a_[computeScale]->a};
+(*------------------------LOW ENERGY MASS DIAGONALIZATION---------------------------------- *)
+					
+ivrMUHATLE={{MU11,MU12},{MU21,MU22}}//.RulePackage;
+ivrMDHATLE={{MD11,MD12,MD13},{MD21,MD22,MD23},{MD31,MD32,MD33}}//.RulePackage;
+ivrMLHATLE={{ML11,ML12,MD13},{ML21,ML22,ML23},{ML31,ML32,ML33}}//.RulePackage;
+
+{LEfermionmassmatrixU,LEAuL}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@Eigensystem[chop[( ivrMUHATLE . ConjugateTranspose[ivrMUHATLE])]]);
+{LEfermionmassmatrixU,LEAuR}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@(Eigensystem[chop[(ConjugateTranspose[ivrMUHATLE] . ivrMUHATLE )]]));
+{LEfermionmassmatrixD,LEAdL}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@Eigensystem[chop[(ivrMDHATLE . ConjugateTranspose[ivrMDHATLE])]]);
+{LEfermionmassmatrixD,LEAdR}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@(Eigensystem[chop[(ConjugateTranspose[ivrMDHATLE] . ivrMDHATLE)]]));
+{LEfermionmassmatrixE,LEAeL}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@Eigensystem[chop[(ivrMLHATLE . ConjugateTranspose[ivrMLHATLE])]]);
+{LEfermionmassmatrixE,LEAeR}={#[[1]],Transpose[#[[2]]]}&@(Reverse/@(Eigensystem[chop[(ConjugateTranspose[ivrMLHATLE] . ivrMLHATLE)]]));
+
+LEKdL=DiagonalMatrix[{Exp[I \[Delta]dL1],Exp[I \[Delta]dL2],Exp[I \[Delta]dL3]}];
+LEKdR=DiagonalMatrix[{Exp[I \[Delta]dR1],Exp[I \[Delta]dR2],Exp[I \[Delta]dR3]}];
+LEKuL=DiagonalMatrix[{Exp[I \[Delta]uL1],Exp[I \[Delta]uL2]}];
+LEKuR=DiagonalMatrix[{Exp[I \[Delta]uR1],Exp[I \[Delta]uR2]}];
+LEKeL=DiagonalMatrix[{Exp[I \[Delta]eL1],Exp[I \[Delta]eL2],Exp[I \[Delta]eL3]}];
+LEKeR=DiagonalMatrix[{Exp[I \[Delta]eR1],Exp[I \[Delta]eR2],Exp[I \[Delta]eR3]}];
+
+LHSLEKd=Simplify[ConjugateTranspose[LEKdL] . ConjugateTranspose[LEAdL] . ivrMDHATLE . LEAdR . LEKdR,Assumptions->$Assumptions]//chopYuk;
+LHSLEKu=Simplify[ConjugateTranspose[LEKuL] . ConjugateTranspose[LEAuL] . ivrMUHATLE . LEAuR . LEKuR,Assumptions->$Assumptions]//chopYuk;
+LHSLEKe=Simplify[ConjugateTranspose[LEKeL] . ConjugateTranspose[LEAeL] . ivrMLHATLE . LEAeR . LEKeR,Assumptions->$Assumptions]//chopYuk;
+
+SolLEKdRot=(Quiet@NSolve[LHSLEKd==DiagonalMatrix[Sqrt[LEfermionmassmatrixD]],{\[Delta]dL1,\[Delta]dL2,\[Delta]dL3}]//chopYuk)[[1]];
+SolLEKuRot=(Quiet@NSolve[LHSLEKu==DiagonalMatrix[Sqrt[LEfermionmassmatrixU]],{\[Delta]uL1,\[Delta]uL2}]//chopYuk)[[1]];
+SolLEKeRot=(Quiet@NSolve[LHSLEKe==DiagonalMatrix[Sqrt[LEfermionmassmatrixE]],{\[Delta]eL1,\[Delta]eL2,\[Delta]eL3}]//chopYuk)[[1]];
+
+FinalLEVdL=Simplify[(LEAdL . LEKdL)/.SolLEKdRot//chop,Assumptions->$Assumptions];
+FinalLEVdR=Simplify[(LEAdR . LEKdR)/.SolLEKdRot//chop,Assumptions->$Assumptions];
+FinalLEVuL=Simplify[(LEAuL . LEKuL)/.SolLEKuRot//chop,Assumptions->$Assumptions];
+FinalLEVuR=Simplify[(LEAuR . LEKuR)/.SolLEKuRot//chop,Assumptions->$Assumptions];
+FinalLEVeL=Simplify[(LEAeL . LEKeL)/.SolLEKeRot//chop,Assumptions->$Assumptions];
+FinalLEVeR=Simplify[(LEAeR . LEKeR)/.SolLEKeRot//chop,Assumptions->$Assumptions];
+
+RuleDetLE=Quiet@NSolve[{Det[FinalLEVdL]==1,Det[FinalLEVuL]==1,Det[FinalLEVeL]==1},{\[Delta]uR1,\[Delta]dR1,\[Delta]eR1}][[1]];
+
+Rule\[Delta]LE={\[Delta]dR2->0,\[Delta]dR3->0,\[Delta]uR2->0,\[Delta]eR2->0,\[Delta]eR3->0};
+
+fermionRotationLEVdL=Simplify[(LEAdL . LEKdL)/.SolLEKdRot/.RuleDetLE/.Rule\[Delta]LE//chopYuk, Assumptions->$Assumptions];
+fermionRotationLEVdR=Simplify[(LEAdR . LEKdR)/.SolLEKdRot/.RuleDetLE/.Rule\[Delta]LE//chopYuk, Assumptions->$Assumptions];
+fermionRotationLEVuL=Simplify[(LEAuL . LEKuL)/.SolLEKuRot/.RuleDetLE/.Rule\[Delta]LE//chopYuk, Assumptions->$Assumptions];
+fermionRotationLEVuR=Simplify[(LEAuR . LEKuR)/.SolLEKuRot/.RuleDetLE/.Rule\[Delta]LE//chopYuk, Assumptions->$Assumptions];
+fermionRotationLEVeL=Simplify[(LEAeL . LEKeL)/.SolLEKeRot/.RuleDetLE/.Rule\[Delta]LE//chopYuk, Assumptions->$Assumptions];
+fermionRotationLEVeR=Simplify[(LEAeR . LEKeR)/.SolLEKeRot/.RuleDetLE/.Rule\[Delta]LE//chopYuk, Assumptions->$Assumptions];					
+									
+					
+CEpckg=ConjugateTranspose[fermionRotationLEVeL] . {{WCOsce11,WCOsce12,WCOsce13},{WCOsce21,WCOsce22,WCOsce23},{WCOsce31,WCOsce32,WCOsce33}} . fermionRotationLEVeR;
+
+CUpckg=ConjugateTranspose[fermionRotationLEVuL] . {{WCOscu11,WCOscu12},{WCOscu21,WCOscu22}} . fermionRotationLEVuR;
+
+CDpckg=ConjugateTranspose[fermionRotationLEVdL] . {{WCOscd11,WCOscd12,WCOscd13},{WCOscd21,WCOscd22,WCOscd23},{WCOscd31,WCOscd32,WCOscd33}} . fermionRotationLEVdR;
+
+MU2pckg=DiagonalMatrix[LEfermionmassmatrixU];
+
+MD2pckg=DiagonalMatrix[LEfermionmassmatrixD];
+
+ML2pckg=DiagonalMatrix[LEfermionmassmatrixE];
+
+
+Cud=-((Im[CUpckg[[1,1]]]Re[CDpckg[[1,1]]])/WCms2);
+Cdu=-((Im[CDpckg[[1,1]]]Re[CUpckg[[1,1]]])/WCms2);
+Cue=-((Im[CUpckg[[1,1]]]Re[CEpckg[[1,1]]])/WCms2);
+Ceu=-((Im[CEpckg[[1,1]]]Re[CUpckg[[1,1]]])/WCms2);
+Cde=-((Im[CDpckg[[1,1]]]Re[CEpckg[[1,1]]])/WCms2);
+Ced=-((Im[CEpckg[[1,1]]]Re[CDpckg[[1,1]]])/WCms2);
+
+CGe=(4\[Pi])/(WCms2 WCg3^2) WCOsG (CEpckg[[1,1]]+Conjugate[CEpckg[[1,1]]])/2;
+CGte=(4\[Pi] )/(WCms2 WCg3^2) WCOsGt (I(CEpckg[[1,1]]-Conjugate[CEpckg[[1,1]]]))/2;
+CS=-17 V\[Phi]^2 (Cue +Cde)+V\[Phi]^2 (4.7 (*GeV*))CGe; 
+CP=350V\[Phi]^2 (Ceu + Ced)+ V\[Phi]^2 (1.1 (*GeV*))CGte;
+
+DG=- ((WCg3 \[Alpha]3)/(4 \[Pi])^3)(\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]
+\*FractionBox[\(h[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]]\ Im[CDpckg[\([\)\(i, i\)\(]\)]]\ Re[CDpckg[\([\)\(i, i\)\(]\)]]\), \(4\ MD2pckg[\([\)\(i, i\)\(]\)]\)]\)+\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(j = 1\), \(2\)]
+\*FractionBox[\(h[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]]\), \(4\ MU2pckg[\([\)\(j, j\)\(]\)]\)]\))+(3 WCg3 WCOsG WCOsGt)/\[Pi]^2 Log[\[CapitalLambda]/Sqrt[WCms2]];
+D1e=WCgem /(16 \[Pi]^2 WCms2)Im[Dot[(CEpckg - ConjugateTranspose[CEpckg])/2,DiagonalMatrix[QL],Sqrt[ML2pckg],DiagonalMatrix[l[Diagonal[ML2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CEpckg + ConjugateTranspose[CEpckg])/2][[1,1]]];
+
+D2e=(WCgem \[Alpha]em QL[[1]])/(8 \[Pi]^3)(\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
+\*FractionBox[\(3\ 
+\*SuperscriptBox[\(QD[\([\)\(i\)\(]\)]\), \(2\)]\), \(Sqrt[MD2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CEpckg[\([\)\(1, 1\)\(]\)]]\ Im[CDpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CEpckg[\([\)\(1, 1\)\(]\)]]\ Re[CDpckg[\([\)\(i, i\)\(]\)]])\)\)\) + \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(j = 1\), \(2\)]\(
+\*FractionBox[\(3\ 
+\*SuperscriptBox[\(QU[\([\)\(j\)\(]\)]\), \(2\)]\), \(Sqrt[MU2pckg[\([\)\(j, j\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Re[CEpckg[\([\)\(1, 1\)\(]\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\  + \ g[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Im[CEpckg[\([\)\(1, 1\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]])\)\)\) + \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
+\*FractionBox[
+SuperscriptBox[\(QL[\([\)\(i\)\(]\)]\), \(2\)], \(Sqrt[ML2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
+\*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CEpckg[\([\)\(1, 1\)\(]\)]]\ Im[CEpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
+\*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CEpckg[\([\)\(1, 1\)\(]\)]]\ Re[CEpckg[\([\)\(i, i\)\(]\)]])\)\)\));
+D3e=(QL[[1]]WCgem)/(2 \[Pi]^2)(WCOsAt Im[CEpckg[[1,1]]] + WCOsA Re[CEpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
+D4e=-((3 QL[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[ML2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+De=D1e+D2e+D3e+D4e;
+
+
+D1u=WCgem /(16 \[Pi]^2 WCms2) Im[Dot[(CUpckg - ConjugateTranspose[CUpckg])/2,DiagonalMatrix[QU],Sqrt[MU2pckg],DiagonalMatrix[l[Diagonal[MU2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CUpckg + ConjugateTranspose[CUpckg])/2][[1,1]]];
+
+
+D2u=(WCgem \[Alpha]em QU[[1]])/(8 \[Pi]^3) (\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
+\*FractionBox[\(3\ 
+\*SuperscriptBox[\(QD[\([\)\(i\)\(]\)]\), \(2\)]\), \(Sqrt[MD2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CUpckg[\([\)\(1, 1\)\(]\)]]\ Im[CDpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CUpckg[\([\)\(1, 1\)\(]\)]]\ Re[CDpckg[\([\)\(i, i\)\(]\)]])\)\)\) + \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(j = 1\), \(2\)]\(
+\*FractionBox[\(3\ 
+\*SuperscriptBox[\(QU[\([\)\(j\)\(]\)]\), \(2\)]\), \(Sqrt[MU2pckg[\([\)\(j, j\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Re[CUpckg[\([\)\(1, 1\)\(]\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\  + \ g[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Im[CUpckg[\([\)\(1, 1\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]])\)\)\) + \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
+\*FractionBox[
+SuperscriptBox[\(QL[\([\)\(i\)\(]\)]\), \(2\)], \(Sqrt[ML2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
+\*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CUpckg[\([\)\(1, 1\)\(]\)]]\ Im[CEpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
+\*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CUpckg[\([\)\(1, 1\)\(]\)]]\ Re[CEpckg[\([\)\(i, i\)\(]\)]])\)\)\));
+D3u=(QU[[1]]WCgem)/(2 \[Pi]^2) (WCOsAt Im[CUpckg[[1,1]]] + WCOsA Re[CUpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
+D4u=-((3 QU[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[MU2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+D5u=-((2 QU[[1]] WCgem \[Alpha]3)/\[Pi]^3)Sqrt[MU2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+Du=D1u+D2u+D3u+D4u+D5u;
+
+
+D1d=WCgem /(16 \[Pi]^2 WCms2) Im[Dot[(CDpckg - ConjugateTranspose[CDpckg])/2,DiagonalMatrix[QD],Sqrt[MD2pckg],DiagonalMatrix[l[Diagonal[MD2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CDpckg + ConjugateTranspose[CDpckg])/2][[1,1]]];
+
+D2d=(WCgem \[Alpha]em QD[[1]])/(8 \[Pi]^3) (\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
+\*FractionBox[\(3\ 
+\*SuperscriptBox[\(QD[\([\)\(i\)\(]\)]\), \(2\)]\), \(Sqrt[MD2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CDpckg[\([\)\(1, 1\)\(]\)]]\ Im[CDpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CDpckg[\([\)\(1, 1\)\(]\)]]\ Re[CDpckg[\([\)\(i, i\)\(]\)]])\)\)\) + \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(j = 1\), \(2\)]\(
+\*FractionBox[\(3\ 
+\*SuperscriptBox[\(QU[\([\)\(j\)\(]\)]\), \(2\)]\), \(Sqrt[MU2pckg[\([\)\(j, j\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Re[CDpckg[\([\)\(1, 1\)\(]\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\  + \ g[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Im[CDpckg[\([\)\(1, 1\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]])\)\)\)+ \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
+\*FractionBox[
+SuperscriptBox[\(QL[\([\)\(i\)\(]\)]\), \(2\)], \(Sqrt[ML2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
+\*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CDpckg[\([\)\(1, 1\)\(]\)]]\ Im[CEpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
+\*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CDpckg[\([\)\(1, 1\)\(]\)]]\ Re[CEpckg[\([\)\(i, i\)\(]\)]])\)\)\));
+D3d=(QD[[1]]WCgem)/(2 \[Pi]^2) (WCOsAt Im[CDpckg[[1,1]]] + WCOsA Re[CDpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
+D4d=-((3 QD[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[MD2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+D5d=-((2 QD[[1]] WCgem \[Alpha]3)/\[Pi]^3)Sqrt[MD2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+Dd=D1d+D2d+D3d+D4d+D5d;
+
+
+D1uC=1 /(16 \[Pi]^2 WCms2) Im[Dot[(CUpckg - ConjugateTranspose[CUpckg])/2,Sqrt[MU2pckg],DiagonalMatrix[l[Diagonal[MU2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CUpckg + ConjugateTranspose[CUpckg])/2][[1,1]]];
+
+D2uC= \[Alpha]3 /(16 \[Pi]^3) (\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
+\*FractionBox[\(1\), \(Sqrt[MD2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CUpckg[\([\)\(1, 1\)\(]\)]]\ Im[CDpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CUpckg[\([\)\(1, 1\)\(]\)]]\ Re[CDpckg[\([\)\(i, i\)\(]\)]])\)\)\) + \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(j = 1\), \(2\)]\(
+\*FractionBox[\(1\), \(Sqrt[MU2pckg[\([\)\(j, j\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Re[CUpckg[\([\)\(1, 1\)\(]\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\  + \ g[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Im[CUpckg[\([\)\(1, 1\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]])\)\)\));
+D3uC=1/(2 \[Pi]^2) (WCOsGt Im[CUpckg[[1,1]]] + WCOsG Re[CUpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
+D4uC=-((4\[Alpha]3)/\[Pi]^3) Sqrt[MU2pckg[[1,1]]]WCOsG WCOsGt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+D5uC=-((3 QU[[1]]^2  \[Alpha]em)/(2\[Pi]^3))Sqrt[MU2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+DuC=D1uC+D2uC+D3uC+D4uC+D5uC;
+
+D1dC=1 /(16 \[Pi]^2 WCms2) Im[Dot[(CDpckg - ConjugateTranspose[CDpckg])/2,Sqrt[MD2pckg],DiagonalMatrix[l[Diagonal[MD2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CDpckg + ConjugateTranspose[CDpckg])/2][[1,1]]];
+
+D2dC= \[Alpha]3 /(16 \[Pi]^3) (\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
+\*FractionBox[\(1\), \(Sqrt[MD2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CDpckg[\([\)\(1, 1\)\(]\)]]\ Im[CDpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
+\*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CDpckg[\([\)\(1, 1\)\(]\)]]\ Re[CDpckg[\([\)\(i, i\)\(]\)]])\)\)\) + \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(j = 1\), \(2\)]\(
+\*FractionBox[\(1\), \(Sqrt[MU2pckg[\([\)\(j, j\)\(]\)]]\)]*\((f[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Re[CDpckg[\([\)\(1, 1\)\(]\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\  + \ g[
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Im[CDpckg[\([\)\(1, 1\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]])\)\)\));
+D3dC=1/(2 \[Pi]^2) (WCOsGt Im[CDpckg[[1,1]]] + WCOsG Re[CDpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
+D4dC=-((4\[Alpha]3)/\[Pi]^3) Sqrt[MD2pckg[[1,1]]]WCOsG WCOsGt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+D5dC=-((3 QD[[1]]^2  \[Alpha]em)/(2\[Pi]^3))Sqrt[MD2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
+DdC=D1dC+D2dC+D3dC+D4dC+D5dC;
+
+
+Dn=(0.784*Du - 0.204 Dd - 0.55 WCgem DuC - 1.10 WCgem DdC + (50*10^-3 (*GeV*))WCgem DG + (30*10^-3 (*GeV*))WCgem(Cud - Cdu))  (*e*GeV^-1*);
+DHg=4.0*10^-4 Dn - ((2.8 CS - 2.1CP)*10^-24 (* m *))WCgem/hbarc   (*e*GeV^-1*);
+\[Omega]ThO= (1.2 (*mrad/s*))(De/WCgem(10^31(*m^-1*)*hbarc    (*GeV*))) +  (1.8(*mrad/s*))(CS*10^9);
+DnRATIO=(Dn/WCgem (* GeV^-1 *))/DnOVEReEXP (* GeV^-1 *)//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]->1000};
+DHgRATIO=((DHg/WCgem (* GeV^-1 *))/DHgOVEReEXP (* GeV^-1 *))//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]->1000};
+\[Omega]ThORATIO=(\[Omega]ThO (*mrad/s*)/\[Omega]ThOEXP)//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]->1000};
+
+
+If[0<= Abs[Observable[[1]]]<= 1,AppendTo[datalist\[Omega]ThO,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalist\[Omega]ThO2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
+If[0<= Abs[Observable[[2]]]<= 1,AppendTo[datalistdHg,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalistdHg2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
+If[0<= Abs[Observable[[3]]]<= 1,AppendTo[datalistdn,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalistdn2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
+
+,{n1,window[[1]]}];
+
+Export[filename,{{datalist\[Omega]ThO,datalist\[Omega]ThO2},{datalistdHg,datalistdHg2},{datalistdn,datalistdn2}}]
+]
 
 
 (* ::Input::Initialization:: *)
