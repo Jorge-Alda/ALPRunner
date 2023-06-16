@@ -4,4 +4,4 @@ A package with the singlet scalar RGEs upto mass-dim-5 implemented, and function
 
 These files are available in ALPRunner.zip . Additional examples and demonstrations will be added to ALPRunner_Guide.nb file.
 
-The theory details are available here : [arxiv:2306.XXXXX](www.google.com). Please cite the article, if you find the package helpful in some regard.
+The theory details are available here : [arxiv:2306.08036]([https://arxiv.org/pdf/2306.08036.pdf]). Please cite the article, if you find the package helpful in some regard.
