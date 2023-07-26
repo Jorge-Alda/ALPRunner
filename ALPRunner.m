@@ -5778,7 +5778,7 @@ boundaryConditionSM::usage="Internal function"
 boundaryCondition::usage="Internal function"
 lst$L3mu::usage="Internal replace list"
 iv$ilist::usage="Internal replace list"
-vevscaleboundaryConditionSM::usage="These are values users put at the vev scale for the SM couplings/parameters and run up at higher scale."
+bcSM::usage="These are values users put at the vev scale for the SM couplings/parameters and run up at higher scale."
 rgeSMto\[CapitalLambda]::usage="Running up the SM couplings to high scale \[CapitalLambda], we store the numerical values of the SM couplings in rgeSMto\[CapitalLambda] variable."
 
 mu::usage="RG Scale"
@@ -6626,6 +6626,7 @@ Cte32::usage=""
 Cte33::usage=""
 
 
+barlist::usage="Misc"
 toSolvingHERGEs::usage="Misc"
 physicalmh2::usage="Misc"
 rgePSEFTparamsolvereset::usage="Misc"
@@ -11558,7 +11559,7 @@ chop[a_]:=Chop[a,10^-($MachinePrecision)]
 
 
 (* ::Input::Initialization:: *)
-vevscaleboundaryConditionSM ={
+bcSM ={
 g1[172]  ==  0.350,                    g2[172]==0.654,                        g3[172]==1.220,
 \[Mu]H2[172]==246^2 * \[Lambda]\[Phi][172],                   \[Lambda]\[Phi][172]==.13,
 
@@ -27194,7 +27195,7 @@ asu\[Phi]11[\[CapitalLambda]]==0,                    asu\[Phi]bar11[\[CapitalLam
 asu\[Phi]21[\[CapitalLambda]]==0,                    asu\[Phi]bar21[\[CapitalLambda]]==0,                    asu\[Phi]22[\[CapitalLambda]]==0,                    asu\[Phi]bar22[\[CapitalLambda]]==0,                    asu\[Phi]23[\[CapitalLambda]]==0,                    asu\[Phi]bar23[\[CapitalLambda]]==0,                    
 asu\[Phi]31[\[CapitalLambda]]==0,                    asu\[Phi]bar31[\[CapitalLambda]]==0,                    asu\[Phi]32[\[CapitalLambda]]==0,                    asu\[Phi]bar32[\[CapitalLambda]]==0,                    asu\[Phi]33[\[CapitalLambda]]==0,                    asu\[Phi]bar33[\[CapitalLambda]]==0}/.\[CapitalLambda]->highscale,
 
-Thread[((#[\[CapitalLambda]]&/@(Head[#]&/@vevscaleboundaryConditionSM[[All,1]]))/.\[CapitalLambda]->highscale)==(((#[\[CapitalLambda]]&/@(Head[#]&/@vevscaleboundaryConditionSM[[All,1]]))/.\[CapitalLambda]->highscale)/.rgeSMto\[CapitalLambda])]]]];
+Thread[((#[\[CapitalLambda]]&/@(Head[#]&/@bcSM[[All,1]]))/.\[CapitalLambda]->highscale)==(((#[\[CapitalLambda]]&/@(Head[#]&/@bcSM[[All,1]]))/.\[CapitalLambda]->highscale)/.rgeSMto\[CapitalLambda])]]]];
 
 
 (* ::Input::Initialization:: *)
@@ -27983,10 +27984,14 @@ Ie3[aE_,Ye_]:=Re[Tr[aE . ConjugateTranspose[Ye] . aE . ConjugateTranspose[Ye] . 
 
 
 (* ::Input::Initialization:: *)
+barlist[ttmp1_]:=(Flatten@Join[ttmp1,(DeleteCases[Thread[Keys[#]->(Conjugate[Values[#]])]&/@(ttmp1/.Equal->Rule),Alternatives@@{g1[_]->_,g2[_]->_,g3[_]->_,\[Mu]H2[_]->_,\[Lambda]\[Phi][_]->_}]/.{Ye11->Yebar11,Ye12->Yebar12,Ye13->Yebar13,Ye21->Yebar21,Ye22->Yebar22,Ye23->Yebar23,Ye31->Yebar31,Ye32->Yebar32,Ye33->Yebar33,Yd11->Ydbar11,Yd12->Ydbar12,Yd13->Ydbar13,Yd21->Ydbar21,Yd22->Ydbar22,Yd23->Ydbar23,Yd31->Ydbar31,Yd32->Ydbar32,Yd33->Ydbar33,Yu11->Yubar11,Yu12->Yubar12,Yu13->Yubar13,Yu21->Yubar21,Yu22->Yubar22,Yu23->Yubar23,Yu31->Yubar31,Yu32->Yubar32,Yu33->Yubar33})/.Rule->Equal])
+
+
+(* ::Input::Initialization:: *)
 scanHEspace[bsmBC_,Lam_,MatScale_,computeScale_,paramlist_,window_,Observable_,filename_]:=
 Module[{\[Alpha]em=WCgem^2/(4\[Pi]),\[Alpha]3=WCg3^2/(4\[Pi]),QU={2/3,2/3},QD={-1/3,-1/3,-1/3},QL={-1,-1,-1},hbarc=197.3269804*10^6*10^-15*10^-9 (* Factor required to convert from natural units in GeV^-1 to IS units in m. *),
 DHgOVEReEXP,DnOVEReEXP,\[Omega]ThOEXP=1.3(* mrad/s *),L,F,G,H,f,g,h,l,FunctionsRule,
-datalist\[Omega]ThO={},datalist\[Omega]ThO2={},datalistdHg={},datalistdHg2={},datalistdn={},datalistdn2={},randompoints,List1,RulePackage},
+datalist\[Omega]ThO={},datalist\[Omega]ThO2={},datalistdHg={},datalistdHg2={},datalistdn={},datalistdn2={},randompoints,List1,RulePackage,\[CapitalLambda]EFT,\[Mu]scale=computeScale,\[Delta]uL1,\[Delta]uL2,\[Delta]uL3,\[Delta]uR1,\[Delta]uR2,\[Delta]uR3,\[Delta]dL1,\[Delta]dL2,\[Delta]dL3,\[Delta]dR1,\[Delta]dR2,\[Delta]dR3,\[Delta]eL1,\[Delta]eL2,\[Delta]eL3,\[Delta]eR1,\[Delta]eR2,\[Delta]eR3},
 
 DHgOVEReEXP=(6*10^-32(* m *))/hbarc (* GeV^-1*);
 DnOVEReEXP=(1.8*10^-28(* m *))/hbarc  (* GeV^-1 *);
@@ -28190,7 +28195,7 @@ DG=- ((WCg3 \[Alpha]3)/(4 \[Pi])^3)(\!\(
 \*FractionBox[\(MD2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]]\ Im[CDpckg[\([\)\(i, i\)\(]\)]]\ Re[CDpckg[\([\)\(i, i\)\(]\)]]\), \(4\ MD2pckg[\([\)\(i, i\)\(]\)]\)]\)+\!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(j = 1\), \(2\)]
 \*FractionBox[\(h[
-\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]]\), \(4\ MU2pckg[\([\)\(j, j\)\(]\)]\)]\))+(3 WCg3 WCOsG WCOsGt)/\[Pi]^2 Log[\[CapitalLambda]/Sqrt[WCms2]];
+\*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]]\), \(4\ MU2pckg[\([\)\(j, j\)\(]\)]\)]\))+(3 WCg3 WCOsG WCOsGt)/\[Pi]^2 Log[\[CapitalLambda]EFT/\[Mu]scale];
 D1e=WCgem /(16 \[Pi]^2 WCms2)Im[Dot[(CEpckg - ConjugateTranspose[CEpckg])/2,DiagonalMatrix[QL],Sqrt[ML2pckg],DiagonalMatrix[l[Diagonal[ML2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CEpckg + ConjugateTranspose[CEpckg])/2][[1,1]]];
 
 D2e=(WCgem \[Alpha]em QL[[1]])/(8 \[Pi]^3)(\!\(
@@ -28209,13 +28214,11 @@ D2e=(WCgem \[Alpha]em QL[[1]])/(8 \[Pi]^3)(\!\(
 SuperscriptBox[\(QL[\([\)\(i\)\(]\)]\), \(2\)], \(Sqrt[ML2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
 \*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CEpckg[\([\)\(1, 1\)\(]\)]]\ Im[CEpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
 \*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CEpckg[\([\)\(1, 1\)\(]\)]]\ Re[CEpckg[\([\)\(i, i\)\(]\)]])\)\)\));
-D3e=(QL[[1]]WCgem)/(2 \[Pi]^2)(WCOsAt Im[CEpckg[[1,1]]] + WCOsA Re[CEpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
-D4e=-((3 QL[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[ML2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-De=D1e+D2e+D3e+D4e;
-
+D3e=(QL[[1]]WCgem)/(2 \[Pi]^2)(WCOsAt Im[CEpckg[[1,1]]] + WCOsA Re[CEpckg[[1,1]]])Log[\[CapitalLambda]EFT/\[Mu]scale];
+D4e=-((3 QL[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[ML2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+De=D1e+D2e+D3e(*+D4e*); (*contributions commented to not overcount*)
 
 D1u=WCgem /(16 \[Pi]^2 WCms2) Im[Dot[(CUpckg - ConjugateTranspose[CUpckg])/2,DiagonalMatrix[QU],Sqrt[MU2pckg],DiagonalMatrix[l[Diagonal[MU2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CUpckg + ConjugateTranspose[CUpckg])/2][[1,1]]];
-
 
 D2u=(WCgem \[Alpha]em QU[[1]])/(8 \[Pi]^3) (\!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(i = 1\), \(3\)]\(
@@ -28233,10 +28236,10 @@ D2u=(WCgem \[Alpha]em QU[[1]])/(8 \[Pi]^3) (\!\(
 SuperscriptBox[\(QL[\([\)\(i\)\(]\)]\), \(2\)], \(Sqrt[ML2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
 \*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CUpckg[\([\)\(1, 1\)\(]\)]]\ Im[CEpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
 \*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CUpckg[\([\)\(1, 1\)\(]\)]]\ Re[CEpckg[\([\)\(i, i\)\(]\)]])\)\)\));
-D3u=(QU[[1]]WCgem)/(2 \[Pi]^2) (WCOsAt Im[CUpckg[[1,1]]] + WCOsA Re[CUpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
-D4u=-((3 QU[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[MU2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-D5u=-((2 QU[[1]] WCgem \[Alpha]3)/\[Pi]^3)Sqrt[MU2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-Du=D1u+D2u+D3u+D4u+D5u;
+D3u=(QU[[1]]WCgem)/(2 \[Pi]^2) (WCOsAt Im[CUpckg[[1,1]]] + WCOsA Re[CUpckg[[1,1]]])Log[\[CapitalLambda]EFT/\[Mu]scale];
+D4u=-((3 QU[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[MU2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+D5u=-((2 QU[[1]] WCgem \[Alpha]3)/\[Pi]^3)Sqrt[MU2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+Du=D1u+D2u+D3u(*+D4u+D5u*);
 
 
 D1d=WCgem /(16 \[Pi]^2 WCms2) Im[Dot[(CDpckg - ConjugateTranspose[CDpckg])/2,DiagonalMatrix[QD],Sqrt[MD2pckg],DiagonalMatrix[l[Diagonal[MD2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CDpckg + ConjugateTranspose[CDpckg])/2][[1,1]]];
@@ -28257,12 +28260,12 @@ D2d=(WCgem \[Alpha]em QD[[1]])/(8 \[Pi]^3) (\!\(
 SuperscriptBox[\(QL[\([\)\(i\)\(]\)]\), \(2\)], \(Sqrt[ML2pckg[\([\)\(i, i\)\(]\)]]\)]*\((f[
 \*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Re[CDpckg[\([\)\(1, 1\)\(]\)]]\ Im[CEpckg[\([\)\(i, i\)\(]\)]]\  + \ g[
 \*FractionBox[\(ML2pckg[\([\)\(i, i\)\(]\)]\), \(WCms2\)]] Im[CDpckg[\([\)\(1, 1\)\(]\)]]\ Re[CEpckg[\([\)\(i, i\)\(]\)]])\)\)\));
-D3d=(QD[[1]]WCgem)/(2 \[Pi]^2) (WCOsAt Im[CDpckg[[1,1]]] + WCOsA Re[CDpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
-D4d=-((3 QD[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[MD2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-D5d=-((2 QD[[1]] WCgem \[Alpha]3)/\[Pi]^3)Sqrt[MD2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-Dd=D1d+D2d+D3d+D4d+D5d;
+D3d=(QD[[1]]WCgem)/(2 \[Pi]^2) (WCOsAt Im[CDpckg[[1,1]]] + WCOsA Re[CDpckg[[1,1]]])Log[\[CapitalLambda]EFT/\[Mu]scale];
+D4d=-((3 QD[[1]]^3 WCgem \[Alpha]em)/\[Pi]^3) Sqrt[MD2pckg[[1,1]]]WCOsA WCOsAt Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+D5d=-((2 QD[[1]] WCgem \[Alpha]3)/\[Pi]^3)Sqrt[MD2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+Dd=D1d+D2d+D3d(*+D4d+D5d*);
 
-
+(*Print["OK5"];*)
 D1uC=1 /(16 \[Pi]^2 WCms2) Im[Dot[(CUpckg - ConjugateTranspose[CUpckg])/2,Sqrt[MU2pckg],DiagonalMatrix[l[Diagonal[MU2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CUpckg + ConjugateTranspose[CUpckg])/2][[1,1]]];
 
 D2uC= \[Alpha]3 /(16 \[Pi]^3) (\!\(
@@ -28274,10 +28277,10 @@ D2uC= \[Alpha]3 /(16 \[Pi]^3) (\!\(
 \*FractionBox[\(1\), \(Sqrt[MU2pckg[\([\)\(j, j\)\(]\)]]\)]*\((f[
 \*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Re[CUpckg[\([\)\(1, 1\)\(]\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\  + \ g[
 \*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Im[CUpckg[\([\)\(1, 1\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]])\)\)\));
-D3uC=1/(2 \[Pi]^2) (WCOsGt Im[CUpckg[[1,1]]] + WCOsG Re[CUpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
-D4uC=-((4\[Alpha]3)/\[Pi]^3) Sqrt[MU2pckg[[1,1]]]WCOsG WCOsGt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-D5uC=-((3 QU[[1]]^2  \[Alpha]em)/(2\[Pi]^3))Sqrt[MU2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-DuC=D1uC+D2uC+D3uC+D4uC+D5uC;
+D3uC=1/(2 \[Pi]^2) (WCOsGt Im[CUpckg[[1,1]]] + WCOsG Re[CUpckg[[1,1]]])Log[\[CapitalLambda]EFT/\[Mu]scale];
+D4uC=-((4\[Alpha]3)/\[Pi]^3) Sqrt[MU2pckg[[1,1]]]WCOsG WCOsGt Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+D5uC=-((3 QU[[1]]^2  \[Alpha]em)/(2\[Pi]^3))Sqrt[MU2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+DuC=D1uC+D2uC+D3uC(*+D4uC+D5uC*);
 
 D1dC=1 /(16 \[Pi]^2 WCms2) Im[Dot[(CDpckg - ConjugateTranspose[CDpckg])/2,Sqrt[MD2pckg],DiagonalMatrix[l[Diagonal[MD2pckg/WCms2]]/.RulePackage  /.FunctionsRule],(CDpckg + ConjugateTranspose[CDpckg])/2][[1,1]]];
 
@@ -28290,23 +28293,24 @@ D2dC= \[Alpha]3 /(16 \[Pi]^3) (\!\(
 \*FractionBox[\(1\), \(Sqrt[MU2pckg[\([\)\(j, j\)\(]\)]]\)]*\((f[
 \*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Re[CDpckg[\([\)\(1, 1\)\(]\)]]\ Im[CUpckg[\([\)\(j, j\)\(]\)]]\  + \ g[
 \*FractionBox[\(MU2pckg[\([\)\(j, j\)\(]\)]\), \(WCms2\)]] Im[CDpckg[\([\)\(1, 1\)\(]\)]]\ Re[CUpckg[\([\)\(j, j\)\(]\)]])\)\)\));
-D3dC=1/(2 \[Pi]^2) (WCOsGt Im[CDpckg[[1,1]]] + WCOsG Re[CDpckg[[1,1]]])Log[\[CapitalLambda]/Sqrt[WCms2]];
-D4dC=-((4\[Alpha]3)/\[Pi]^3) Sqrt[MD2pckg[[1,1]]]WCOsG WCOsGt Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-D5dC=-((3 QD[[1]]^2  \[Alpha]em)/(2\[Pi]^3))Sqrt[MD2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]/Sqrt[WCms2]]^2;
-DdC=D1dC+D2dC+D3dC+D4dC+D5dC;
+D3dC=1/(2 \[Pi]^2) (WCOsGt Im[CDpckg[[1,1]]] + WCOsG Re[CDpckg[[1,1]]])Log[\[CapitalLambda]EFT/\[Mu]scale];
+D4dC=-((4\[Alpha]3)/\[Pi]^3) Sqrt[MD2pckg[[1,1]]]WCOsG WCOsGt Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+D5dC=-((3 QD[[1]]^2  \[Alpha]em)/(2\[Pi]^3))Sqrt[MD2pckg[[1,1]]](WCOsA WCOsGt + WCOsAt WCOsG)Log[\[CapitalLambda]EFT/\[Mu]scale]^2;
+DdC=D1dC+D2dC+D3dC(*+D4dC+D5dC*);
 
 
 Dn=(0.784*Du - 0.204 Dd - 0.55 WCgem DuC - 1.10 WCgem DdC + (50*10^-3 (*GeV*))WCgem DG + (30*10^-3 (*GeV*))WCgem(Cud - Cdu))  (*e*GeV^-1*);
 DHg=4.0*10^-4 Dn - ((2.8 CS - 2.1CP)*10^-24 (* m *))WCgem/hbarc   (*e*GeV^-1*);
 \[Omega]ThO= (1.2 (*mrad/s*))(De/WCgem(10^31(*m^-1*)*hbarc    (*GeV*))) +  (1.8(*mrad/s*))(CS*10^9);
-DnRATIO=(Dn/WCgem (* GeV^-1 *))/DnOVEReEXP (* GeV^-1 *)//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]->1000};
-DHgRATIO=((DHg/WCgem (* GeV^-1 *))/DHgOVEReEXP (* GeV^-1 *))//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]->1000};
-\[Omega]ThORATIO=(\[Omega]ThO (*mrad/s*)/\[Omega]ThOEXP)//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]->1000};
+DnRATIO=(Dn/WCgem (* GeV^-1 *))/DnOVEReEXP (* GeV^-1 *)//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]EFT->MatScale};
+DHgRATIO=((DHg/WCgem (* GeV^-1 *))/DHgOVEReEXP (* GeV^-1 *))//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]EFT->MatScale};
+\[Omega]ThORATIO=(\[Omega]ThO (*mrad/s*)/\[Omega]ThOEXP)//.RulePackage/.FunctionsRule/.{V\[Phi]->246,\[CapitalLambda]EFT->MatScale};
 
 
-If[0<= Abs[Observable[[1]]]<= 1,AppendTo[datalist\[Omega]ThO,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalist\[Omega]ThO2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
-If[0<= Abs[Observable[[2]]]<= 1,AppendTo[datalistdHg,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalistdHg2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
-If[0<= Abs[Observable[[3]]]<= 1,AppendTo[datalistdn,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalistdn2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
+
+If[0<= Abs[\[Omega]ThORATIO]<= 1,AppendTo[datalist\[Omega]ThO,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalist\[Omega]ThO2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
+If[0<= Abs[DHgRATIO]<= 1,AppendTo[datalistdHg,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalistdHg2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
+If[0<= Abs[DnRATIO]<= 1,AppendTo[datalistdn,{randompoints[[n1,1]],randompoints[[n1,2]]}],AppendTo[datalistdn2,{randompoints[[n1,1]],randompoints[[n1,2]]}]];
 
 ,{n1,window[[1]]}];
 
